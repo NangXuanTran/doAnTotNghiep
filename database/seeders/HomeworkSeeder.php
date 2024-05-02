@@ -17,7 +17,7 @@ class HomeworkSeeder extends Seeder
 
         DB::table('homeworks')->insert([
             'classroom_id' => 1,
-            'homework_name' => "Test dinh ky",
+            'homework_name' => 'Test dinh ky',
             'time' => 30,
             'end_time' => $date,
         ]);

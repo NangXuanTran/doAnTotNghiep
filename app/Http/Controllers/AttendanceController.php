@@ -30,6 +30,7 @@ class AttendanceController extends Controller
             $attendance['lesson_name'] = $attendance->lesson->lesson_name;
             $attendance['class_name'] = $attendance->lesson->classroom;
         }
+
         return $attendances;
     }
 

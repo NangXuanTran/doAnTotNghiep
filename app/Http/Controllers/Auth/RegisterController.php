@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -26,7 +24,6 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +39,7 @@ class RegisterController extends Controller
             'name.required' => 'Name is required',
             'email.required' => 'Email is required',
             'password.required' => 'Password is required',
-            'terms.accepted' => 'You must accept the terms and conditions'
+            'terms.accepted' => 'You must accept the terms and conditions',
         ]);
 
         $user = User::create([
@@ -51,9 +48,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-
         Auth::login($user);
-
 
         return redirect(RouteServiceProvider::HOME);
     }
