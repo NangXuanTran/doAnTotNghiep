@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/list', [ClassController::class, 'getListApi'])->name('get.class-all-api');
         Route::get('/detail/{class_id}', [ClassController::class, 'detailApi'])->name('get.class-detail-api');
         Route::get('/lesson', [ClassController::class, 'getLessonTodayApi'])->name('get.lesson-today-api');
-        Route::get('/lesson_schedule_task', [ClassController::class, 'getLessonScheduleTaskApi'])->name('get.lesson-all-schedule-api');
+        Route::post('/lesson_schedule_task', [ClassController::class, 'getLessonScheduleTaskApi'])->name('get.lesson-all-schedule-api');
         Route::get('/task', [ClassController::class, 'getTaskApi'])->name('get.task-api');
     });
 
