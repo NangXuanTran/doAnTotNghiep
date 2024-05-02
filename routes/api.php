@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->prefix('user')->group(function () {
     Route::get('/', [AuthController::class, 'index'])->name('get.user');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
 });
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -45,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('homework')->group(function () {
         Route::get('/lists', [HomeworkController::class, 'listApi'])->name('get.list-homework-api');
         Route::get('/questions/{homework_id}', [HomeworkController::class, 'listQuestionApi'])->name('get.list-question-api');
+        Route::post('/result/store', [HomeworkController::class, 'storeResultApi'])->name('store.result-api');
     });
 
     // Teacher

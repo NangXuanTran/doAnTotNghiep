@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Homework;
+use App\Models\HomeworkResult;
 use Illuminate\Http\Request;
 
 class HomeworkController extends Controller
@@ -41,5 +42,13 @@ class HomeworkController extends Controller
         }
 
         return $questions;
+    }
+
+    public function storeResultApi(Request $request) {
+        $request['score'] = $request->count_correct / $request->count_question * 100;
+        unset($request['count_correct'], $request['count_question']);
+        $resultHomework = HomeworkResult::createOrFirst($request->all());
+
+        return $resultHomework;
     }
 }

@@ -23,15 +23,14 @@ class AttendanceController extends Controller
         return $classrooms;
     }
 
-    public function listApi()
+    public function listApi(Request $request)
     {
-        $attendances = Attendance::all();
+        $attendances = Attendance::where('id', $request->user()->id)->get();
         foreach ($attendances as $attendance) {
             $attendance['lesson_name'] = $attendance->lesson->lesson_name;
-            $attendance['classroom'] = $attendance->lesson->classroom;
-            unset($attendance['created_at'], $attendance['updated_at']);
+            $attendance['class_name'] = $attendance->lesson->classroom->name;
+            unset($attendance['lesson']);
         }
-
         return $attendances;
     }
 

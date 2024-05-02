@@ -19,9 +19,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number')->nullable();
             $table->integer('role'); // 1 is manager, 2 is teacher, 3 is student
-            $table->string('phone')->nullable();
-            $table->string('location')->nullable();
-            $table->text('about')->nullable();
             $table->timestamps();
         });
     }
