@@ -28,8 +28,7 @@ class AttendanceController extends Controller
         $attendances = Attendance::where('id', $request->user()->id)->get();
         foreach ($attendances as $attendance) {
             $attendance['lesson_name'] = $attendance->lesson->lesson_name;
-            $attendance['class_name'] = $attendance->lesson->classroom->name;
-            unset($attendance['lesson']);
+            $attendance['class_name'] = $attendance->lesson->classroom;
         }
         return $attendances;
     }
