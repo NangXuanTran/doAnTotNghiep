@@ -2,7 +2,7 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
 
-        <form method="POST" action="{{ route('user.update', $user) }}">
+        <form method="POST" action="{{ route('user.update', $user->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
@@ -53,8 +53,6 @@
                         </div>
                     </div>
 
-                    {{-- <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm float-end">Save
-                        changes</button> --}}
                     <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm">XÁC NHẬN</button>
                 </div>
             </div>

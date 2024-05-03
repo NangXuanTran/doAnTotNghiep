@@ -26,7 +26,8 @@ class UserController extends Controller
         $request['password'] = Hash::make('password');
         $user = User::create($request->all());
 
-        return view('student.add');
+        flash()->addSuccess('Thêm học viên thành công.');
+        return redirect()->route('user.index');
     }
 
     public function show($id)
@@ -38,11 +39,18 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, $id)
     {
-        // dd($request);
-        // dd($id);
         unset($request['_token'], $request['_method']);
         $user = User::where('id', $id)->update($request->all());
 
-        return view('student.edit', compact('user'));
+        flash()->addSuccess('Cập nhật thông tin thành công');
+        return redirect()->route('user.index');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::where('id', $id)->delete();
+
+        flash()->addSuccess('Xóa thông tin thành công.');
+        return back();
     }
 }

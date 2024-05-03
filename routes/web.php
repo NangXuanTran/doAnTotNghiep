@@ -51,3 +51,4 @@ Route::put('/laravel-examples/user-profile/update', [ProfileController::class, '
 Route::get('/laravel-examples/users-management', [UserController::class, 'index'])->name('users-management')->middleware('auth');
 
 Route::resource('user', UserController::class);
+

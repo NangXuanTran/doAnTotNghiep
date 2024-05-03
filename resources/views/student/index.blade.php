@@ -11,7 +11,7 @@
                                     <h5 class="">QUẢN LÝ HỌC VIÊN</h5>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="#" class="btn btn-dark btn-primary">
+                                    <a href="{{ route('user.create') }}" class="btn btn-dark btn-primary">
                                         <i class="fas fa-user-plus me-2"></i> THÊM
                                     </a>
                                 </div>
@@ -73,8 +73,8 @@
                                             <td class="text-center align-middle bg-transparent border-bottom">{{$user->phone_number}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">{{$user->birthday}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
-                                                <a href="#"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                                                <a href="{{ route('user.show', $user->id )}}"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
+                                                <a href="{{ route('user.destroy', $user->id )}}"><i class="fas fa-trash" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -102,3 +102,4 @@
         }]
     });
 </script>
+
