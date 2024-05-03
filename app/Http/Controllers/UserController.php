@@ -48,9 +48,9 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::where('id', $id)->delete();
+        User::where('id', $id)->delete();
 
         flash()->addSuccess('Xóa thông tin thành công.');
-        return back();
+        return redirect()->route('user.index');
     }
 }

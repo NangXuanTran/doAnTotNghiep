@@ -74,7 +74,13 @@
                                             <td class="text-center align-middle bg-transparent border-bottom">{{$user->birthday}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
                                                 <a href="{{ route('user.show', $user->id )}}"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
-                                                <a href="{{ route('user.destroy', $user->id )}}"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                                                <a href="{{ route('user.destroy', $user->id )}}"
+                                                    type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteUserModal"
+                                                    data-user-id="{{ $user->id }}"
+                                                >
+                                                <i class="fas fa-trash" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -103,3 +109,36 @@
     });
 </script>
 
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel">Xác nhận xóa người dùng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa người dùng này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form id="deleteUserForm" action="" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#deleteUserModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var userId = button.data('user-id');
+
+        var actionUrl = '/user/' + userId;
+        var modal = $(this);
+        modal.find('#deleteUserForm').attr('action', actionUrl);
+    })
+</script>
