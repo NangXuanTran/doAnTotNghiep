@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->prefix('user')->group(function () {
     Route::get('/', [AuthController::class, 'index'])->name('get.user');
     Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
+    Route::post('/change-info', [AuthController::class, 'changeInfo'])->name('user.change-info');
+    Route::post('/change-pass', [AuthController::class, 'changePassword'])->name('user.change-password');
 });
 
 Route::post('/login', [AuthController::class, 'login']);

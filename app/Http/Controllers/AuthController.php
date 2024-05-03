@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\UpdateInfoUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -50,5 +52,21 @@ class AuthController extends Controller
             $data = 'ok',
             $status = 200,
         );
+    }
+
+    public function changeInfo(UpdateInfoUserRequest $request) {
+        return User::where('id', $request->user()->id)->update($request->all());
+    }
+
+    public function changePassword(ChangePasswordRequest $request) {
+        if(!Hash::check($request->password, auth()->user()->password)){
+            return 0;
+        }
+
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return 1;
     }
 }
