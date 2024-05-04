@@ -49,12 +49,6 @@
                 </div>
             </li>
             <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.profile') ? 'active' : '' }}"
-                    href="{{ route('users.profile') }}">
-                    <span class="nav-link-text ms-1" style="font-size: 17px">User Profile</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('teacher.index') ? 'active' : '' }}"
                     href="{{ route('teacher.index') }}">
                     <span class="nav-link-text ms-1" style="font-size: 17px">Giáo viên</span>
@@ -64,6 +58,36 @@
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('user.index') ? 'active' : '' }}"
                     href="{{ route('user.index') }}">
                     <span class="nav-link-text ms-1" style="font-size: 17px">Học viên</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('user.index') ? 'active' : '' }}"
+                    href="{{ route('user.index') }}">
+                    <span class="nav-link-text ms-1" style="font-size: 17px">Lớp học</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('room.index') ? 'active' : '' }}"
+                    href="{{ route('room.index') }}">
+                    <span class="nav-link-text ms-1" style="font-size: 17px">Phòng học</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('user.index') ? 'active' : '' }}"
+                    href="{{ route('user.index') }}">
+                    <span class="nav-link-text ms-1" style="font-size: 17px">Tài liệu</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('user.index') ? 'active' : '' }}"
+                    href="{{ route('user.index') }}">
+                    <span class="nav-link-text ms-1" style="font-size: 17px">Bài tập về nhà</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('user.index') ? 'active' : '' }}"
+                    href="{{ route('user.index') }}">
+                    <span class="nav-link-text ms-1" style="font-size: 17px">Ngân hàng câu hỏi</span>
                 </a>
             </li>
         </ul>
