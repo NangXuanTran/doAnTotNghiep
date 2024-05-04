@@ -44,6 +44,11 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         unset($request['_token'], $request['_method']);
+        if(!$request->file('image')) {
+            $request['image_url'] = $this->upload($request);
+
+            unset($request['image']);
+        }
         $user = User::where('id', $id)->update($request->all());
 
         flash()->addSuccess('Cập nhật thông tin thành công');
@@ -71,10 +76,9 @@ class UserController extends Controller
 
     public function uploadImage($file)
     {
-        $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
+        $fileName = $file->getClientOriginalName();
         $file->move(public_path('uploads'), $fileName);
 
-        // Tạo URL đầy đủ cho ảnh
         $imageUrl = url('uploads/' . $fileName);
         return $imageUrl;
     }
