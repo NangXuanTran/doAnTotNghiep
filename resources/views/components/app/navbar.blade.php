@@ -34,7 +34,13 @@
                 </li>
                 <li class="nav-item ps-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm" alt="avatar" />
+                        <?php
+                            use App\Models\User;
+                            $user = User::find(auth()->user()->id);
+                        ?>
+                        <img src="{{ $user->image_url ? asset($user->image_url) :
+                            asset('../assets/img/team-1.jpg') }}" class="rounded-circle mr-2"
+                               alt="user1" style="height: 36px; width: 36px;">
                     </a>
                 </li>
             </ul>

@@ -71,17 +71,19 @@ class UserController extends Controller
 
     public function uploadImage($file)
     {
-        $storagePath = $this->prepairFolder();
+        $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
+        $file->move(public_path('uploads'), $fileName);
 
-        $path = $file->store($storagePath, 'public');
-        return $path;
+        // Tạo URL đầy đủ cho ảnh
+        $imageUrl = url('uploads/' . $fileName);
+        return $imageUrl;
     }
 
     public function prepairFolder()
     {
         $year = date('Y');
         $month = date('m');
-        $storagePath = "public/$year/$month";
+        $storagePath = "$year/$month/";
 
         if (! file_exists($storagePath)) {
             mkdir($storagePath, 0755, true);
