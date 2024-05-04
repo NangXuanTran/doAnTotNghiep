@@ -40,6 +40,9 @@
                                             ID</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                            ẢNH ĐẠI DIỆN</th>
+                                        <th
+                                            class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                             HỌ TÊN</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
@@ -62,6 +65,13 @@
                                     @foreach ($teachers as $teacher)
                                         <tr>
                                             <td class="align-middle bg-transparent border-bottom">{{$teacher->id}}</td>
+                                            <td class="align-middle bg-transparent border-bottom">
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <img src="{{ $teacher->image_url ? asset($teacher->image_url) :
+                                                     asset('../assets/img/team-1.jpg') }}" class="rounded-circle mr-2"
+                                                        alt="user1" style="height: 36px; width: 36px;">
+                                                </div>
+                                            </td>
                                             <td class="align-middle bg-transparent border-bottom">{{$teacher->name}}</td>
                                             <td class="align-middle bg-transparent border-bottom">{{$teacher->email}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">{{$teacher->phone_number}}</td>
