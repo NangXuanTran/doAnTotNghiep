@@ -55,7 +55,7 @@ class RoomController extends Controller
 
     public function destroy($id)
     {
-        User::where('id', $id)->delete();
+        Room::where('id', $id)->delete();
 
         flash()->addSuccess('Xóa thông tin thành công.');
         return redirect()->route('user.index');
