@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -79,7 +81,7 @@ class UserController extends Controller
     {
         $year = date('Y');
         $month = date('m');
-        $storagePath = "$year/$month";
+        $storagePath = "public/$year/$month";
 
         if (! file_exists($storagePath)) {
             mkdir($storagePath, 0755, true);

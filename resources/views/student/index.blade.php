@@ -64,7 +64,8 @@
                                             <td class="align-middle bg-transparent border-bottom">{{$user->id}}</td>
                                             <td class="align-middle bg-transparent border-bottom">
                                                 <div class="d-flex justify-content-center align-items-center">
-                                                    <img src="{{ $user->image_url }}" class="rounded-circle mr-2"
+                                                    <img src="{{ $user->image_url ? asset($user->image_url) :
+                                                     asset('../assets/img/team-1.jpg') }}" class="rounded-circle mr-2"
                                                         alt="user1" style="height: 36px; width: 36px;">
                                                 </div>
                                             </td>

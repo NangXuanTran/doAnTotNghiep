@@ -25,6 +25,7 @@ class HomeworkResultFactory extends Factory
             'homework_id' => $this->faker->randomElement($homeworkIds),
             'student_id' => $this->faker->randomElement($userIds),
             'score' => $this->faker->randomFloat(0, 50, 100),
+            'is_finished' => 1,
         ];
     }
 }
