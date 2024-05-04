@@ -16,6 +16,12 @@ class HomeworkController extends Controller
             $homework['nameClass'] = $homework->classroom->name;
             $homework['assignmentName'] = $homework->homework_name;
             unset($homework['homework_name'], $homework['created_at'], $homework['updated_at']);
+            $homeworkResult = HomeworkResult::where('homework_id', $homework->id)
+                ->where('student_id', $request->user()->id)
+                ->first();
+            $homework['count_question'] = count($homework->questions);
+            $homework['is_finished'] = $homeworkResult ? $homeworkResult->is_finished : 0;
+            $homework['score'] = $homeworkResult?->score;
         }
 
         return $homeworks;
@@ -47,6 +53,7 @@ class HomeworkController extends Controller
     public function storeResultApi(Request $request)
     {
         $request['score'] = $request->count_correct / $request->count_question * 100;
+        $request['is_finished'] = 1;
         unset($request['count_correct'], $request['count_question']);
         $resultHomework = HomeworkResult::createOrFirst($request->all());
 

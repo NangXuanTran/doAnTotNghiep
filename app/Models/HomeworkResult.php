@@ -13,5 +13,6 @@ class HomeworkResult extends Model
         'homework_id',
         'student_id',
         'score',
+        'is_finished',
     ];
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('homework_id');
             $table->unsignedBigInteger('student_id');
             $table->float('score');
+            $table->integer('is_finished')->default(0);
             $table->timestamps();
         });
     }
