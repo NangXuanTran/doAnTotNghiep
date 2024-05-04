@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->integer('role'); // 1 is manager, 2 is teacher, 3 is student
             $table->date('birthday')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }

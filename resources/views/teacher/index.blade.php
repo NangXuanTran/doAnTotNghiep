@@ -8,10 +8,10 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6" style="margin-top:10px">
-                                    <h5 class="">QUẢN LÝ HỌC VIÊN</h5>
+                                    <h5 class="">QUẢN LÝ GIÁO VIÊN</h5>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="{{ route('user.create') }}" class="btn btn-dark btn-primary">
+                                    <a href="{{ route('teacher.create') }}" class="btn btn-dark btn-primary">
                                         <i class="fas fa-user-plus me-2"></i> THÊM
                                     </a>
                                 </div>
@@ -40,9 +40,6 @@
                                             ID</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            ẢNH ĐẠI DIỆN</th>
-                                        <th
-                                            class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                             HỌ TÊN</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
@@ -55,30 +52,34 @@
                                             NGÀY SINH</th>
                                         <th
                                             class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                            LỚP HỌC QUẢN LÝ</th>
+                                        <th
+                                            class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                             HÀNH ĐỘNG   </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($teachers as $teacher)
                                         <tr>
-                                            <td class="align-middle bg-transparent border-bottom">{{$user->id}}</td>
-                                            <td class="align-middle bg-transparent border-bottom">
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <img src="{{ $user->image_url }}" class="rounded-circle mr-2"
-                                                        alt="user1" style="height: 36px; width: 36px;">
-                                                </div>
-                                            </td>
-                                            <td class="align-middle bg-transparent border-bottom">{{$user->name}}</td>
-                                            <td class="align-middle bg-transparent border-bottom">{{$user->email}}</td>
-                                            <td class="text-center align-middle bg-transparent border-bottom">{{$user->phone_number}}</td>
-                                            <td class="text-center align-middle bg-transparent border-bottom">{{$user->birthday}}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{$teacher->id}}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{$teacher->name}}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{$teacher->email}}</td>
+                                            <td class="text-center align-middle bg-transparent border-bottom">{{$teacher->phone_number}}</td>
+                                            <td class="text-center align-middle bg-transparent border-bottom">{{$teacher->birthday}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
-                                                <a href="{{ route('user.show', $user->id )}}"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
-                                                <a href="{{ route('user.destroy', $user->id )}}"
+                                                <ul style="padding-left: 0">
+                                                    @foreach ($teacher->classes as $teacher->class)
+                                                        <li style="list-style: none;">{{ $teacher->class->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td class="text-center align-middle bg-transparent border-bottom">
+                                                <a href="{{ route('teacher.show', $teacher->id )}}"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
+                                                <a href="{{ route('teacher.destroy', $teacher->id )}}"
                                                     type="button"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteUserModal"
-                                                    data-user-id="{{ $user->id }}"
+                                                    data-user-id="{{ $teacher->id }}"
                                                 >
                                                 <i class="fas fa-trash" aria-hidden="true"></i></a>
                                             </td>
@@ -86,7 +87,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $users->links('layouts.paginate') }}
+                            {{ $teachers->links('layouts.paginate') }}
                         </div>
                     </div>
                 </div>
@@ -137,7 +138,7 @@
         var button = $(event.relatedTarget);
         var userId = button.data('user-id');
 
-        var actionUrl = '/user/' + userId;
+        var actionUrl = '/teacher/' + userId;
         var modal = $(this);
         modal.find('#deleteUserForm').attr('action', actionUrl);
     })

@@ -18,7 +18,8 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'role',
-        'birthday'
+        'birthday',
+        'image_url'
     ];
 
     protected $hidden = [
@@ -39,5 +40,11 @@ class User extends Authenticatable
     public function classrooms()
     {
         return $this->belongsToMany(Classroom::class, 'classroom_students', 'student_id', 'classroom_id');
+    }
+
+    // 1 teacher - n class
+    public function classes()
+    {
+        return $this->hasMany(Classroom::class, 'teacher_id', 'id');
     }
 }

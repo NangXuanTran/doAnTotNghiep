@@ -25,8 +25,8 @@ class StoreUserRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'name' => 'required|string',
             'phone_number' => 'required|string|regex:/^0\d{9,10}$/',
-            'birthday' => 'required|before:today'
-
+            'birthday' => 'required|before:today',
+            'image' => 'required|mimes:jpg,jpeg,png'
         ];
     }
 }

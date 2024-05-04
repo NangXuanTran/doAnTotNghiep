@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::where('role', 3)->paginate(10)->withQueryString();
+        $users = User::where('role', 3)->orderBy('id', 'desc')->paginate(10)->withQueryString();
 
         return view('student.index', compact('users'));
     }
@@ -24,9 +23,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request) {
         $request['role'] = 3;
         $request['password'] = Hash::make('password');
+        $request['image_url'] = $this->upload($request);
+
+        unset($request['image']);
         $user = User::create($request->all());
 
-        flash()->addSuccess('Thêm học viên thành công.');
+        flash()->addSuccess('Thêm thông tin thành công.');
         return redirect()->route('user.index');
     }
 
@@ -52,5 +54,37 @@ class UserController extends Controller
 
         flash()->addSuccess('Xóa thông tin thành công.');
         return redirect()->route('user.index');
+    }
+
+    public function upload($request)
+    {
+        $file = $request->file('image');
+
+        try {
+            return $this->uploadImage($file);
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function uploadImage($file)
+    {
+        $storagePath = $this->prepairFolder();
+
+        $path = $file->store($storagePath, 'public');
+        return $path;
+    }
+
+    public function prepairFolder()
+    {
+        $year = date('Y');
+        $month = date('m');
+        $storagePath = "$year/$month";
+
+        if (! file_exists($storagePath)) {
+            mkdir($storagePath, 0755, true);
+        }
+
+        return $storagePath;
     }
 }
