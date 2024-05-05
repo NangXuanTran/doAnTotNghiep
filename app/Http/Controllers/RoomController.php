@@ -58,6 +58,6 @@ class RoomController extends Controller
         Room::where('id', $id)->delete();
 
         flash()->addSuccess('Xóa thông tin thành công.');
-        return redirect()->route('user.index');
+        return redirect()->route('room.index');
     }
 }

@@ -61,7 +61,7 @@
                                                     type="button"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteUserModal"
-                                                    data-user-id="{{ $room->id }}"
+                                                    data-room-id="{{ $room->id }}"
                                                 >
                                                 <i class="fas fa-trash" aria-hidden="true"></i></a>
                                             </td>
@@ -118,9 +118,9 @@
 <script>
     $('#deleteUserModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var userId = button.data('user-id');
+        var roomId = button.data('room-id');
 
-        var actionUrl = '/user/' + userId;
+        var actionUrl = '/room/' + roomId;
         var modal = $(this);
         modal.find('#deleteUserForm').attr('action', actionUrl);
     })
