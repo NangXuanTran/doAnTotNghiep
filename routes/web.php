@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -52,4 +53,5 @@ Route::resource('user', UserController::class);
 Route::resource('teacher', TeacherController::class);
 Route::resource('room', RoomController::class);
 
+Route::resource('question', QuestionController::class);
 
