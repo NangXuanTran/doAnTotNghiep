@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Room;
 use Exception;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
@@ -16,80 +17,96 @@ class QuestionController extends Controller
     }
 
     public function create() {
-        return view('student.add');
+        return view('question.add');
     }
 
-    // public function store(StoreUserRequest $request) {
-    //     $request['role'] = 3;
-    //     $request['password'] = Hash::make('password');
-    //     $request['image_url'] = $this->upload($request);
+    public function store(Request $request) {
+        $request->validate([
+            'question' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'option_1' => [
+                'required',
+                'string',
+                'max:255',
+            ],'option_2' => [
+                'required',
+                'string',
+                'max:255',
+            ],'option_3' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'option_4' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'answer' => [
+                'required',
+            ],
 
-    //     unset($request['image']);
-    //     $user = User::create($request->all());
+        ]);
+        $question = Question::create($request->all());
 
-    //     flash()->addSuccess('Thêm thông tin thành công.');
-    //     return redirect()->route('user.index');
-    // }
+        flash()->addSuccess('Thêm thông tin thành công.');
+        return redirect()->route('question.index');
+    }
 
-    // public function show($id)
-    // {
-    //     $user = User::findOrFail($id);
+    public function show($id)
+    {
+        $question = Question::findOrFail($id);
 
-    //     return view('student.edit', compact('user'));
-    // }
+        return view('question.edit', compact('question'));
+    }
 
-    // public function update(UpdateUserRequest $request, $id)
-    // {
-    //     unset($request['_token'], $request['_method']);
-    //     if($request->file('image')) {
-    //         $request['image_url'] = $this->upload($request);
-    //     }
-    //     unset($request['image']);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'question' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'option_1' => [
+                'required',
+                'string',
+                'max:255',
+            ],'option_2' => [
+                'required',
+                'string',
+                'max:255',
+            ],'option_3' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'option_4' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'answer' => [
+                'required',
+            ],
 
-    //     $user = User::where('id', $id)->update($request->all());
+        ]);
+        unset($request['_token'], $request['_method']);
 
-    //     flash()->addSuccess('Cập nhật thông tin thành công');
-    //     return redirect()->route('user.index');
-    // }
+        $question = Question::where('id', $id)->update($request->all());
 
-    // public function destroy($id)
-    // {
-    //     User::where('id', $id)->delete();
+        flash()->addSuccess('Cập nhật thông tin thành công');
+        return redirect()->route('question.index');
+    }
 
-    //     flash()->addSuccess('Xóa thông tin thành công.');
-    //     return redirect()->route('user.index');
-    // }
+    public function destroy($id)
+    {
+        Question::where('id', $id)->delete();
 
-    // public function upload($request)
-    // {
-    //     $file = $request->file('image');
-
-    //     try {
-    //         return $this->uploadImage($file);
-    //     } catch (Exception $e) {
-    //         return false;
-    //     }
-    // }
-
-    // public function uploadImage($file)
-    // {
-    //     $fileName = $file->getClientOriginalName();
-    //     $file->move(public_path('uploads'), $fileName);
-
-    //     $imageUrl = url('uploads/' . $fileName);
-    //     return $imageUrl;
-    // }
-
-    // public function prepairFolder()
-    // {
-    //     $year = date('Y');
-    //     $month = date('m');
-    //     $storagePath = "$year/$month/";
-
-    //     if (! file_exists($storagePath)) {
-    //         mkdir($storagePath, 0755, true);
-    //     }
-
-    //     return $storagePath;
-    // }
+        flash()->addSuccess('Xóa thông tin thành công.');
+        return redirect()->route('question.index');
+    }
 }

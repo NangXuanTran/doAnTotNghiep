@@ -2,7 +2,7 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
 
-        <form method="POST" action="{{ route('user.update', $user->id) }}">
+        <form method="POST" action="{{ route('question.update', $question->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
@@ -13,9 +13,9 @@
 
                     <div class="row">
                         <div class="col-9">
-                            <label for="name">HỌ TÊN</label>
-                            <input type="text" name="name" id="name" value="{{ $user->name }}" placeholder="Nguyen Van An" class="form-control">
-                            @error('name')
+                            <label for="question">CÂU HỎI</label>
+                            <input type="text" value="{{$question->question}}" name="question" id="question" placeholder="QUESTION ABCD" class="form-control">
+                            @error('question')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -23,10 +23,9 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="email">EMAIL</label>
-                            <input type="text" name="email" id="email" value="{{ $user->email }}" placeholder="nangxxx@gmail.com"
-                            class="form-control" readonly>
-                            @error('email')
+                            <label for="option_1">A.</label>
+                            <input type="text" value="{{$question->option_1}}" name="option_1" id="option_1" placeholder="OPTION 1" class="form-control">
+                            @error('option_1')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -34,10 +33,9 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="phone_number">SỐ ĐIỆN THOẠI</label>
-                            <input type="text" name="phone_number" value="{{ $user->phone_number }}" id="phone_number" placeholder="0333501xxx"
-                                 class="form-control" >
-                            @error('phone_number')
+                            <label for="option_2">B.</label>
+                            <input type="text" value="{{$question->option_2}}" name="option_2" id="option_2" placeholder="OPTION 2" class="form-control">
+                            @error('option_2')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -45,9 +43,9 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="birthday">NGÀY SINH</label>
-                            <input type="date" name="birthday" value="{{ $user->birthday  }}" id="birthday" class="form-control">
-                            @error('birthday')
+                            <label for="option_3">C.</label>
+                            <input type="text" value="{{$question->option_3}}" name="option_3" id="option_3" placeholder="OPTION 3" class="form-control">
+                            @error('option_3')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -55,14 +53,28 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="image">ẢNH ĐẠI DIỆN</label>
-                            <input type="file" name="image" id="image" class="form-control">
-                            @error('image')
+                            <label for="option_4">D.</label>
+                            <input type="text" value="{{$question->option_4}}" name="option_4" id="option_4" placeholder="OPTION 4" class="form-control">
+                            @error('option_4')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                    <div id="imageContainer"></div>
+
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="answer">ĐÁP ÁN</label>
+                            <select id="answer" name="answer">
+                                <option value="option_1" @if($question->answer == 'option_1') selected @endif>A</option>
+                                <option value="option_2" @if($question->answer == 'option_2') selected @endif>B</option>
+                                <option value="option_3" @if($question->answer == 'option_3') selected @endif>C</option>
+                                <option value="option_4" @if($question->answer == 'option_4') selected @endif>D</option>
+                            </select>
+                            @error('answer')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm">XÁC NHẬN</button>
                 </div>

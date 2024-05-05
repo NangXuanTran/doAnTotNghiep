@@ -38,12 +38,12 @@
                                     Câu hỏi {{ $question->id}}:</span> <span>{{ $question->question }}</span>
                                 </h5>
                                 <div style="position: absolute;margin: 10% 0 0 102%; display:flex">
-                                    <a href="{{ route('user.show', $question->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                                    <a style="margin-left: 5px" href="{{ route('user.destroy', $question->id )}}"
+                                    <a href="{{ route('question.show', $question->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                    <a style="margin-left: 5px" href="{{ route('question.destroy', $question->id )}}"
                                         type="button"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteUserModal"
-                                        data-user-id="{{ $question->id }}"
+                                        data-question-id="{{ $question->id }}"
                                     >
                                     <i class="fas fa-trash" aria-hidden="true"></i></a>
                                 </div>
@@ -110,9 +110,9 @@
 <script>
     $('#deleteUserModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var userId = button.data('user-id');
+        var questionId = button.data('question-id');
 
-        var actionUrl = '/question/' + userId;
+        var actionUrl = '/question/' + questionId;
         var modal = $(this);
         modal.find('#deleteUserForm').attr('action', actionUrl);
     })

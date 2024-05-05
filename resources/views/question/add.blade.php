@@ -2,19 +2,19 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
 
-        <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('question.store') }}">
             @csrf
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
                 <div class="col-lg-6 col-12 ">
                     <div class="card-header" style="margin-bottom: 20px">
-                        <h5>THÊM HỌC VIÊN</h5>
+                        <h5>THÊM CÂU HỎI</h5>
                     </div>
 
                     <div class="row">
                         <div class="col-9">
-                            <label for="name">HỌ TÊN</label>
-                            <input type="text" name="name" id="name" placeholder="Nguyen Van An" class="form-control">
-                            @error('name')
+                            <label for="question">CÂU HỎI</label>
+                            <input type="text" name="question" id="question" placeholder="QUESTION ABCD" class="form-control">
+                            @error('question')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -22,9 +22,9 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="email">EMAIL</label>
-                            <input type="text" name="email" id="email" placeholder="nangxxx@gmail.com" class="form-control">
-                            @error('email')
+                            <label for="option_1">A.</label>
+                            <input type="text" name="option_1" id="option_1" placeholder="OPTION 1" class="form-control">
+                            @error('option_1')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -32,10 +32,9 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="phone_number">SỐ ĐIỆN THOẠI</label>
-                            <input type="text" name="phone_number" id="phone_number" placeholder="0333501xxx"
-                                 class="form-control">
-                            @error('phone_number')
+                            <label for="option_2">B.</label>
+                            <input type="text" name="option_2" id="option_2" placeholder="OPTION 2" class="form-control">
+                            @error('option_2')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -43,9 +42,9 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="birthday">NGÀY SINH</label>
-                            <input type="date" name="birthday" id="birthday" class="form-control">
-                            @error('birthday')
+                            <label for="option_3">C.</label>
+                            <input type="text" name="option_3" id="option_3" placeholder="OPTION 3" class="form-control">
+                            @error('option_3')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -53,14 +52,28 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="image">ẢNH ĐẠI DIỆN</label>
-                            <input type="file" name="image" id="image" class="form-control">
-                            @error('image')
+                            <label for="option_4">D.</label>
+                            <input type="text" name="option_4" id="option_4" placeholder="OPTION 4" class="form-control">
+                            @error('option_4')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                    <div id="imageContainer"></div>
+
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="answer">ĐÁP ÁN</label>
+                            <select id="answer" name="answer">
+                                <option value="option_1">A</option>
+                                <option value="option_2">B</option>
+                                <option value="option_3">C</option>
+                                <option value="option_4">D</option>
+                            </select>
+                            @error('answer')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
 
                     {{-- <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm float-end">Save
                         changes</button> --}}
@@ -82,25 +95,5 @@
             select: [2, 6],
             sortable: false
         }]
-    });
-</script>
-
-<script>
-    document.getElementById('image').addEventListener('change', function(event) {
-        const file = event.target.files[0]; // Lấy file đã được chọn
-
-        if (file) {
-            const reader = new FileReader(); // Tạo một đối tượng FileReader
-
-            reader.onload = function(event) {
-                const imgElement = document.createElement('img'); // Tạo thẻ <img> mới
-                imgElement.src = event.target.result; // Gán giá trị của file đã đọc vào thuộc tính src của thẻ <img>
-                imgElement.style.maxWidth = '100%'; // Thiết lập chiều rộng tối đa của ảnh
-                document.getElementById('imageContainer').innerHTML = ''; // Xóa bất kỳ ảnh trước đó trong container
-                document.getElementById('imageContainer').appendChild(imgElement); // Thêm ảnh vào container
-            };
-
-            reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
-        }
     });
 </script>
