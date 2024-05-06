@@ -15,11 +15,7 @@
                             <div class="card card-plain mt-8">
                                 <div class="card-header pb-0 text-left bg-transparent text-center">
                                     <h3 class="font-weight-black text-dark display-6">Welcome back</h3>
-                                    <p class="mb-0">Welcome back!</p>
-                                    <p class="mb-0">Create a new acount<br></p>
-                                    <p class="mb-0">OR Sign in with these credentials:</p>
-                                    <p class="mb-0">Email: <b>admin@corporateui.com</b></p>
-                                    <p class="mb-0">Password: <b>secret</b></p>
+
                                 </div>
                                 <div class="text-center">
                                     @if (session('status'))
@@ -52,13 +48,7 @@
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-dark w-100 mt-4 mb-3">Sign in</button>
-                                            <button type="button" class="btn btn-white btn-icon w-100 mb-3">
-                                                <span class="btn-inner--icon me-1">
-                                                    <img class="w-5" src="../assets/img/logos/google-logo.svg"
-                                                        alt="google-logo" />
-                                                </span>
-                                                <span class="btn-inner--text">Sign in with Google</span>
-                                            </button>
+
                                         </div>
                                     </form>
                                 </div>

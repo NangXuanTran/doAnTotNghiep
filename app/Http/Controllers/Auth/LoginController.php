@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $rememberMe)) {
             $request->session()->regenerate();
-
+            flash()->addSuccess('Đăng nhập thành công.');
             return redirect()->intended('/dashboard');
         }
 

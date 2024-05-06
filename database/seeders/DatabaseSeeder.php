@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             DocumentSeeder::class,
             DocumentLessonSeeder::class,
+            HomeworkQuestionSeeder::class,
         ]);
     }
 }

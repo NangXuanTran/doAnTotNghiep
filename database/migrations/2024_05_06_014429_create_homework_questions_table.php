@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('homework_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->string('option_1');
-            $table->string('option_2');
-            $table->string('option_3');
-            $table->string('option_4');
-            $table->string('answer'); // 1=> answer_1,  2=> answer_2,  3=> answer_3,  4=> answer_4
+            $table->unsignedBigInteger('homework_id');
+            $table->unsignedBigInteger('question_id');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('homework_questions');
     }
 };

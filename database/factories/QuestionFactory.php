@@ -22,8 +22,6 @@ class QuestionFactory extends Factory
         $examIds = Exam::get()->pluck('id')->toArray();
 
         return [
-            'homework_id' => $this->faker->randomElement($homeworkIds),
-            'exam_id' => $this->faker->randomElement($examIds),
             'question' => $this->faker->words(20, true),
             'option_1' => $this->faker->words(10, true),
             'option_2' => $this->faker->words(10, true),
