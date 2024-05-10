@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TeacherController;
@@ -52,6 +53,8 @@ Route::post('/logout', [LoginController::class, 'destroy'])
 Route::resource('user', UserController::class);
 Route::resource('teacher', TeacherController::class);
 Route::resource('room', RoomController::class);
-
+Route::resource('document', DocumentController::class);
+Route::post('/document/upload', [DocumentController::class, 'uploadFile'])->name('document.upload');
+Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
 Route::resource('question', QuestionController::class);
 

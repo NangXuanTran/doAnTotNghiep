@@ -73,8 +73,8 @@
                 </a>
             </li>
             <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('user.index') ? 'active' : '' }}"
-                    href="{{ route('user.index') }}">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('document.index') ? 'active' : '' }}"
+                    href="{{ route('document.index') }}">
                     <span class="nav-link-text ms-1" style="font-size: 17px">Tài liệu</span>
                 </a>
             </li>

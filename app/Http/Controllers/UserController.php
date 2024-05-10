@@ -6,14 +6,15 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('role', 3)->orderBy('id', 'desc')->paginate(10)->withQueryString();
+        $users = User::where('role', 3)->whereNot('id', $request->user()->id)->orderBy('id', 'desc')->paginate(10)->withQueryString();
 
         return view('student.index', compact('users'));
     }

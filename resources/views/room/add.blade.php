@@ -7,7 +7,7 @@
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
                 <div class="col-lg-6 col-12 ">
                     <div class="card-header" style="margin-bottom: 20px">
-                        <h5>THÊM HỌC VIÊN</h5>
+                        <h5>THÊM PHÒNG HỌC</h5>
                     </div>
 
                     <div class="row">
