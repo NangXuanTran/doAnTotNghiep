@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Document;
 use Exception;
 use Illuminate\Support\Carbon;
@@ -21,13 +22,14 @@ class DocumentController extends Controller
 
     public function uploadFile(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:pdf,doc',
-        ]);
-
+        if($request->file('file')->extension() !=  'pdf')
+        {
+            flash()->addError('Chỉ hỗ trợ upload file dạng pdf.');
+            return redirect()->route('document.index');
+        }
         $request['link_url'] = $this->upload($request);
 
-        unset($request['image']);
+        unset($request['file']);
         Document::create($request->all());
 
         flash()->addSuccess('Thêm thông tin thành công.');
