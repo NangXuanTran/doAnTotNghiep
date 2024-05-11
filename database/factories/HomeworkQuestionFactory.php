@@ -20,6 +20,7 @@ class HomeworkQuestionFactory extends Factory
     {
         $homeworkIds = Homework::get()->pluck('id')->toArray();
         $questionIds = Question::get()->pluck('id')->toArray();
+
         return [
             'homework_id' => $this->faker->randomElement($homeworkIds),
             'question_id' => $this->faker->randomElement($questionIds),

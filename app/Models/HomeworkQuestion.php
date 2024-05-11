@@ -13,5 +13,4 @@ class HomeworkQuestion extends Model
         'homework_id',
         'question_id',
     ];
-
 }

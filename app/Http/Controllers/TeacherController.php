@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
@@ -24,11 +24,13 @@ class TeacherController extends Controller
         return view('teacher.index', compact('teachers'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('teacher.add');
     }
 
-    public function store(StoreUserRequest $request) {
+    public function store(StoreUserRequest $request)
+    {
         $request['role'] = 2;
         $request['password'] = Hash::make('password');
         $request['image_url'] = $this->upload($request);
@@ -37,6 +39,7 @@ class TeacherController extends Controller
         $user = User::create($request->all());
 
         flash()->addSuccess('Thêm thông tin thành công.');
+
         return redirect()->route('teacher.index');
     }
 
@@ -50,7 +53,7 @@ class TeacherController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         unset($request['_token'], $request['_method']);
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $request['image_url'] = $this->upload($request);
         }
         unset($request['image']);
@@ -58,6 +61,7 @@ class TeacherController extends Controller
         $user = User::where('id', $id)->update($request->all());
 
         flash()->addSuccess('Cập nhật thông tin thành công');
+
         return redirect()->route('teacher.index');
     }
 
@@ -66,6 +70,7 @@ class TeacherController extends Controller
         User::where('id', $id)->delete();
 
         flash()->addSuccess('Xóa thông tin thành công.');
+
         return redirect()->route('teacher.index');
     }
 
@@ -85,7 +90,8 @@ class TeacherController extends Controller
         $fileName = $file->getClientOriginalName();
         $file->move(public_path('uploads'), $fileName);
 
-        $imageUrl = url('uploads/' . $fileName);
+        $imageUrl = url('uploads/'.$fileName);
+
         return $imageUrl;
     }
 

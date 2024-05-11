@@ -16,14 +16,17 @@ class RoomController extends Controller
         return view('room.index', compact('rooms'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('room.add');
     }
 
-    public function store(StoreRoomRequest $request) {
+    public function store(StoreRoomRequest $request)
+    {
         $room = Room::create($request->all());
 
         flash()->addSuccess('Thêm thông tin thành công.');
+
         return redirect()->route('room.index');
     }
 
@@ -42,7 +45,7 @@ class RoomController extends Controller
                 'string',
                 Rule::unique('rooms')->ignore($id),
             ],
-            'description' => ['string']
+            'description' => ['string'],
         ]);
 
         unset($request['_token'], $request['_method']);
@@ -50,6 +53,7 @@ class RoomController extends Controller
         $room = Room::where('id', $id)->update($request->all());
 
         flash()->addSuccess('Cập nhật thông tin thành công');
+
         return redirect()->route('room.index');
     }
 
@@ -58,6 +62,7 @@ class RoomController extends Controller
         Room::where('id', $id)->delete();
 
         flash()->addSuccess('Xóa thông tin thành công.');
+
         return redirect()->route('room.index');
     }
 }

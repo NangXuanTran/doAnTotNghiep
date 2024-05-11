@@ -24,7 +24,7 @@ class UpdateInfoUserRequest extends FormRequest
         return [
             'name' => 'string',
             'phone_number' => 'string|regex:/^0\d{9,10}$/',
-            'birthday' => 'before:today'
+            'birthday' => 'before:today',
         ];
     }
 }

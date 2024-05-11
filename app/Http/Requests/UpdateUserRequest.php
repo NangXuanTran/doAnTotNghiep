@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -27,7 +26,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string',
             'phone_number' => 'required|string|regex:/^0\d{9,10}$/',
             'birthday' => 'required|before:today',
-            'image' => 'nullable|file|mimes:jpg,jpeg,png'
+            'image' => 'nullable|file|mimes:jpg,jpeg,png',
         ];
     }
 }

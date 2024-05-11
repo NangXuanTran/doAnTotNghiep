@@ -15,7 +15,8 @@ class HomeworkController extends Controller
         return view('homework.index', compact('homeworks'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('homework.add');
     }
 

@@ -54,17 +54,19 @@ class AuthController extends Controller
         );
     }
 
-    public function changeInfo(UpdateInfoUserRequest $request) {
+    public function changeInfo(UpdateInfoUserRequest $request)
+    {
         return User::where('id', $request->user()->id)->update($request->all());
     }
 
-    public function changePassword(ChangePasswordRequest $request) {
-        if(!Hash::check($request->password, auth()->user()->password)){
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        if (! Hash::check($request->password, auth()->user()->password)) {
             return 0;
         }
 
         User::whereId(auth()->user()->id)->update([
-            'password' => Hash::make($request->new_password)
+            'password' => Hash::make($request->new_password),
         ]);
 
         return 1;

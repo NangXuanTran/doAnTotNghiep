@@ -8,7 +8,6 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -19,11 +18,13 @@ class UserController extends Controller
         return view('student.index', compact('users'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('student.add');
     }
 
-    public function store(StoreUserRequest $request) {
+    public function store(StoreUserRequest $request)
+    {
         $request['role'] = 3;
         $request['password'] = Hash::make('password');
         $request['image_url'] = $this->upload($request);
@@ -32,6 +33,7 @@ class UserController extends Controller
         $user = User::create($request->all());
 
         flash()->addSuccess('Thêm thông tin thành công.');
+
         return redirect()->route('user.index');
     }
 
@@ -45,7 +47,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         unset($request['_token'], $request['_method']);
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $request['image_url'] = $this->upload($request);
         }
         unset($request['image']);
@@ -53,6 +55,7 @@ class UserController extends Controller
         $user = User::where('id', $id)->update($request->all());
 
         flash()->addSuccess('Cập nhật thông tin thành công');
+
         return redirect()->route('user.index');
     }
 
@@ -61,6 +64,7 @@ class UserController extends Controller
         User::where('id', $id)->delete();
 
         flash()->addSuccess('Xóa thông tin thành công.');
+
         return redirect()->route('user.index');
     }
 
@@ -80,7 +84,8 @@ class UserController extends Controller
         $fileName = $file->getClientOriginalName();
         $file->move(public_path('uploads'), $fileName);
 
-        $imageUrl = url('uploads/' . $fileName);
+        $imageUrl = url('uploads/'.$fileName);
+
         return $imageUrl;
     }
 

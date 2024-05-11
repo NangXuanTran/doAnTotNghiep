@@ -33,7 +33,12 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $rememberMe)) {
             $request->session()->regenerate();
             flash()->addSuccess('Đăng nhập thành công.');
-            return redirect()->intended('/dashboard');
+
+            if(Auth::user()->isAdmin()) {
+                return redirect()->intended('/dashboard');
+            }
+            else
+                return redirect()->intended('/teacher');
         }
 
         return back()->withErrors([

@@ -27488,3 +27488,7 @@ button.swiper-pagination-bullet {
 .page-item.active {
     color: #fff;
 }
+
+.collapse.navbar-collapse.px-4.w-auto {
+    height: fit-content;
+}

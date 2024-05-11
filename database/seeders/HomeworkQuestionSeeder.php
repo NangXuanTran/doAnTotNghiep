@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\HomeworkQuestion;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class HomeworkQuestionSeeder extends Seeder
