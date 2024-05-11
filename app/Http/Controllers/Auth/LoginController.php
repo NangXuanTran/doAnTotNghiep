@@ -34,11 +34,11 @@ class LoginController extends Controller
             $request->session()->regenerate();
             flash()->addSuccess('Đăng nhập thành công.');
 
-            if(Auth::user()->isAdmin()) {
+            if (Auth::user()->isAdmin()) {
                 return redirect()->intended('/dashboard');
-            }
-            else
+            } else {
                 return redirect()->intended('/teacher');
+            }
         }
 
         return back()->withErrors([

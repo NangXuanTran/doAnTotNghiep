@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UpdateInfoUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -54,6 +55,57 @@ class AuthController extends Controller
         );
     }
 
+    //WEB
+    public function myInfo($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('auth.edit', compact('user'));
+    }
+
+    public function changeMyInfo(UpdateUserRequest $request, $id)
+    {
+        unset($request['_token'], $request['_method']);
+        if ($request->file('image')) {
+            $request['image_url'] = $this->upload($request);
+        }
+        unset($request['image']);
+
+        User::where('id', $id)->update($request->all());
+        $user = User::findOrFail($id);
+
+        flash()->addSuccess('Cập nhật thông tin thành công');
+
+        return redirect()->route('auth.my-info', $user->id);
+    }
+
+    public function password($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('auth.password', compact('user'));
+    }
+
+    public function changeMyPassword(ChangePasswordRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (! Hash::check($request->password, auth()->user()->password)) {
+            flash()->addError('Mật khẩu không chính xác.');
+
+            return redirect()->route('auth.password', $user->id);
+        }
+
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        flash()->addSuccess('Cập nhật thông tin thành công');
+
+        return redirect()->route('auth.password', $user->id);
+    }
+
+    // API
     public function changeInfo(UpdateInfoUserRequest $request)
     {
         return User::where('id', $request->user()->id)->update($request->all());
