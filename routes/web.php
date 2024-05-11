@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TeacherController;
@@ -57,4 +58,5 @@ Route::resource('document', DocumentController::class);
 Route::post('/document/upload', [DocumentController::class, 'uploadFile'])->name('document.upload');
 Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
 Route::resource('question', QuestionController::class);
+Route::resource('homework', HomeworkController::class);
 

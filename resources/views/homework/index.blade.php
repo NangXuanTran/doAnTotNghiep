@@ -8,11 +8,11 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6" style="margin-top:10px">
-                                    <h5 class="">QUẢN LÝ PHÒNG HỌC</h5>
+                                    <h5 class="">BÀI TẬP VỀ NHÀ</h5>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="{{ route('room.create') }}" class="btn btn-dark btn-primary">
-                                        <i class="fas fa-user-plus me-2"></i> THÊM
+                                    <a href="{{ route('homework.create') }}" class="btn btn-dark btn-primary">
+                                        <i class="fas fa-plus me-2"></i> THÊM
                                     </a>
                                 </div>
                             </div>
@@ -40,28 +40,36 @@
                                             ID</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            PHÒNG HỌC</th>
+                                            TÊN</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            MÔ TẢ</th>
+                                            SỐ LƯỢNG CÂU HỎI</th>
+                                        <th
+                                            class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                            THỜI GIAN (PHÚT)</th>
+                                        <th
+                                            class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                            HẠN CHÓT</th>
                                         <th
                                             class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                             HÀNH ĐỘNG   </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($rooms as $key => $room)
+                                    @foreach ($homeworks as $key => $homework)
                                         <tr>
-                                            <td class="align-middle bg-transparent border-bottom">{{ $room->id }}</td>
-                                            <td class="align-middle bg-transparent border-bottom">{{$room->name}}</td>
-                                            <td class="align-middle bg-transparent border-bottom">{{$room->description}}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ $homework->id }}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ $homework->homework_name }}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ count($homework->questions) }}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ $homework->time }}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ $homework->end_time }}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
-                                                <a href="{{ route('room.show', $room->id )}}"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
-                                                <a href="{{ route('room.destroy', $room->id )}}"
+                                                <a href="{{ route('homework.show', $homework->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                <a href="{{ route('homework.destroy', $homework->id )}}"
                                                     type="button"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteUserModal"
-                                                    data-room-id="{{ $room->id }}"
+                                                    data-homework-id="{{ $homework->id }}"
                                                 >
                                                 <i class="fas fa-trash" aria-hidden="true"></i></a>
                                             </td>
@@ -69,12 +77,13 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $rooms->links('layouts.paginate') }}
+                            {{ $homeworks->links('layouts.paginate') }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <x-app.footer />
     </main>
 
 </x-app-layout>

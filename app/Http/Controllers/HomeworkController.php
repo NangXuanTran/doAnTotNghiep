@@ -8,6 +8,58 @@ use Illuminate\Http\Request;
 
 class HomeworkController extends Controller
 {
+    public function index(Request $request)
+    {
+        $homeworks = Homework::paginate(10)->withQueryString();
+
+        return view('homework.index', compact('homeworks'));
+    }
+
+    public function create() {
+        return view('homework.add');
+    }
+
+    // public function store(StoreUserRequest $request) {
+    //     $request['role'] = 3;
+    //     $request['password'] = Hash::make('password');
+    //     $request['image_url'] = $this->upload($request);
+
+    //     unset($request['image']);
+    //     $user = User::create($request->all());
+
+    //     flash()->addSuccess('Thêm thông tin thành công.');
+    //     return redirect()->route('user.index');
+    // }
+
+    // public function show($id)
+    // {
+    //     $user = User::findOrFail($id);
+
+    //     return view('student.edit', compact('user'));
+    // }
+
+    // public function update(UpdateUserRequest $request, $id)
+    // {
+    //     unset($request['_token'], $request['_method']);
+    //     if($request->file('image')) {
+    //         $request['image_url'] = $this->upload($request);
+    //     }
+    //     unset($request['image']);
+
+    //     $user = User::where('id', $id)->update($request->all());
+
+    //     flash()->addSuccess('Cập nhật thông tin thành công');
+    //     return redirect()->route('user.index');
+    // }
+
+    // public function destroy($id)
+    // {
+    //     User::where('id', $id)->delete();
+
+    //     flash()->addSuccess('Xóa thông tin thành công.');
+    //     return redirect()->route('user.index');
+    // }
+
     public function listApi(Request $request)
     {
         $homeworks = Homework::with('classroom')->get();

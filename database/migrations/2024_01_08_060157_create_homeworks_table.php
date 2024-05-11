@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('homeworks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('classroom_id');
+            $table->unsignedBigInteger('classroom_id')->nullable();
             $table->string('homework_name');
             $table->float('time');
             $table->dateTime('end_time');

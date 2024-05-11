@@ -68,7 +68,6 @@
                 </div>
             </div>
         </form>
-        <x-app.footer />
     </main>
 
 </x-app-layout>
