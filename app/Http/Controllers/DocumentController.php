@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UploadFileRequest;
 use App\Models\Document;
 use Exception;
 use Illuminate\Support\Carbon;
