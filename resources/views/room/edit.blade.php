@@ -8,12 +8,12 @@
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
                 <div class="col-lg-6 col-12 ">
                     <div class="card-header" style="margin-bottom: 20px">
-                        <h5>SỬA THÔNG TIN</h5>
+                        <h5>SỬA THÔNG TIN PHÒNG HỌC</h5>
                     </div>
 
                     <div class="row">
                         <div class="col-9">
-                            <label for="name">PHÒNG HỌC</label>
+                            <label for="name">TÊN</label>
                             <input type="text" name="name" id="name" value="{{ $room->name }}" placeholder="Room ABC" class="form-control">
                             @error('name')
                                 <span class="text-danger text-sm">{{ $message }}</span>

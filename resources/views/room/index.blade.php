@@ -40,7 +40,7 @@
                                             ID</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            PHÒNG HỌC</th>
+                                            TÊN</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                             MÔ TẢ</th>

@@ -8,7 +8,7 @@
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
                 <div class="col-lg-6 col-12 ">
                     <div class="card-header" style="margin-bottom: 20px">
-                        <h5>SỬA THÔNG TIN</h5>
+                        <h5>SỬA THÔNG TIN GIÁO VIÊN</h5>
                     </div>
 
                     <div class="row">
@@ -46,16 +46,6 @@
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
                             <label for="birthday">NGÀY SINH</label>
-                            <input type="date" name="birthday" value="{{ $teacher->birthday  }}" id="birthday" class="form-control">
-                            @error('birthday')
-                                <span class="text-danger text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 3%;">
-                        <div class="col-9">
-                            <label for="birthday">LỚP HỌC QUẢN LÝ</label>
                             <input type="date" name="birthday" value="{{ $teacher->birthday  }}" id="birthday" class="form-control">
                             @error('birthday')
                                 <span class="text-danger text-sm">{{ $message }}</span>

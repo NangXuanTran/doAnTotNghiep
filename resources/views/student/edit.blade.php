@@ -8,7 +8,7 @@
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
                 <div class="col-lg-6 col-12 ">
                     <div class="card-header" style="margin-bottom: 20px">
-                        <h5>SỬA THÔNG TIN</h5>
+                        <h5>SỬA THÔNG TIN HỌC VIÊN</h5>
                     </div>
 
                     <div class="row">

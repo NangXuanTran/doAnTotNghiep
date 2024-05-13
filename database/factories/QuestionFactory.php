@@ -22,7 +22,7 @@ class QuestionFactory extends Factory
         $examIds = Exam::get()->pluck('id')->toArray();
 
         return [
-            'question' => $this->faker->words(20, true),
+            'question' => $this->faker->words(10, true),
             'option_1' => $this->faker->words(10, true),
             'option_2' => $this->faker->words(10, true),
             'option_3' => $this->faker->words(10, true),

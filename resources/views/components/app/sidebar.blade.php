@@ -7,7 +7,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand d-flex align-items-center m-0"
-            href="route('')" target="_blank">
+            href="" >
             <span class="font-weight-bold text-lg">TRUNG TÂM ABC</span>
         </a>
     </div>
@@ -21,7 +21,7 @@
                             class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                             <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>dashboard</title>
+                                <title >dashboard</title>
                                 <g id="dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="template" transform="translate(12.000000, 12.000000)" fill="#FFFFFF"
                                         fill-rule="nonzero">
@@ -38,7 +38,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1" style="font-size: 17px">Dashboard</span>
                     </a>
                 </li>
 
