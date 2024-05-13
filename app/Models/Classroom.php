@@ -13,6 +13,7 @@ class Classroom extends Model
         'name',
         'teacher_id',
         'room_id',
+        'fee'
     ];
     /**
      * Relationships
@@ -26,6 +27,12 @@ class Classroom extends Model
 
     // n student - n class
     public function classrooms()
+    {
+        return $this->belongsToMany(User::class, 'classroom_students', 'classroom_id', 'student_id');
+    }
+
+    // n student - n class
+    public function students()
     {
         return $this->belongsToMany(User::class, 'classroom_students', 'classroom_id', 'student_id');
     }

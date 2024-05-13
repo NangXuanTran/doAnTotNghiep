@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,32 +37,33 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/password/{id}', [AuthController::class, 'password'])->name('auth.password');
     Route::PUT('/change-password/{id}', [AuthController::class, 'changeMyPassword'])->name('auth.change-my-password');
 
+    Route::resource('question', QuestionController::class);
+
+    Route::resource('homework', HomeworkController::class);
+
+    Route::resource('document', DocumentController::class);
+    Route::post('/document/upload', [DocumentController::class, 'uploadFile'])->name('document.upload');
+    Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
+
     Route::middleware('admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('user', UserController::class);
         Route::resource('teacher', TeacherController::class);
         Route::resource('room', RoomController::class);
-        Route::resource('document', DocumentController::class);
-        Route::post('/document/upload', [DocumentController::class, 'uploadFile'])->name('document.upload');
-        Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
-        Route::resource('question', QuestionController::class);
-        Route::resource('homework', HomeworkController::class);
+
     });
 
-    Route::post('/logout', [LoginController::class, 'destroy'])
-        ->middleware('auth')
-        ->name('logout');
+    Route::middleware('teacher')->group(function () {
+        Route::get('/attendance', [AttendanceController::class,'index'])->name('attendance.index');
+        Route::get('/attendance/detail/{id}', [AttendanceController::class,'detailClass'])->name('attendance.detail.class');
+
+        Route::get('/calendar', [ScheduleController::class,'index'])->name('calendar.index');
+    });
+
+
 });
 
-// Route::middleware('teacher')->group(function () {
-//     Route::resource('document', DocumentController::class);
-//     Route::post('/document/upload', [DocumentController::class, 'uploadFile'])->name('document.upload');
-//     Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
-//     Route::resource('question', QuestionController::class);
-//     Route::resource('homework', HomeworkController::class);
-//     Route::resource('attendance', HomeworkController::class);
-//     Route::get('/schedule', [DocumentController::class, 'schedule'])->name('teacher.schedule');
-// });
+Route::post('/logout', [LoginController::class, 'destroy'])
+        ->middleware('auth')
+        ->name('logout');

@@ -25,6 +25,7 @@ class ClassroomFactory extends Factory
             'name' => $this->faker->words(3, true),
             'teacher_id' => $this->faker->randomElement($userIds),
             'room_id' => $this->faker->randomElement($roomIds),
+            'fee' => 1000000,
         ];
     }
 }

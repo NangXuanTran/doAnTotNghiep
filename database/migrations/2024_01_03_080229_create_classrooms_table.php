@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('schedule')->nullable();
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('fee')->nullable();
             $table->timestamps();
         });
     }
