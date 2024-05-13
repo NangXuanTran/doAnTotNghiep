@@ -40,10 +40,18 @@
                         </div>
                     </div>
 
-                    <div class="col-6 text-end">
-                        <button id="addSelectButton" class="btn btn-dark btn-primary">
-                            <i class="fas fa-plus me-2"></i>
-                        </button>
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="end_time">CÂU HỎI</label>
+                            <select class="multi-question form-control" name="questions[]" multiple="multiple">
+                                @foreach ($questions as $question)
+                                    <option value="{{ $question->id }}"><span style="font-size: bold">Câu hỏi {{ $question->id }}: </span>{{ $question->question }}</option>
+                                @endforeach
+                            </select>
+                            @error('end_time')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
 
                     <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm">XÁC NHẬN</button>
@@ -68,21 +76,8 @@
 </script>
 
 <script>
-    document.getElementById("addSelectButton").addEventListener("click", function() {
-      var newSelect = document.createElement("select");
-      newSelect.name = "newSelectName";
-
-      var option1 = document.createElement("option");
-      option1.value = "option1Value";
-      option1.text = "Option 1";
-      newSelect.appendChild(option1);
-
-      var option2 = document.createElement("option");
-      option2.value = "option2Value";
-      option2.text = "Option 2";
-      newSelect.appendChild(option2);
-
-      document.getElementById("yourFormId").appendChild(newSelect);
+    $(document).ready(function() {
+        $('.multi-question').select2();
     });
-  </script>
+</script>
 

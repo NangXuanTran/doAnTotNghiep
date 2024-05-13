@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreHomeworkController;
+use App\Http\Requests\StoreHomeworkRequest;
+use App\Http\Requests\UpdateHomeworkRequest;
 use App\Models\Homework;
+use App\Models\HomeworkQuestion;
 use App\Models\HomeworkResult;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class HomeworkController extends Controller
@@ -17,49 +22,74 @@ class HomeworkController extends Controller
 
     public function create()
     {
-        return view('homework.add');
+        $questions = Question::orderBy('id', 'desc')->get();
+
+        return view('homework.add', compact('questions'));
     }
 
-    // public function store(StoreUserRequest $request) {
-    //     $request['role'] = 3;
-    //     $request['password'] = Hash::make('password');
-    //     $request['image_url'] = $this->upload($request);
+    public function store(StoreHomeworkRequest $request) {
+        $homework = Homework::create([
+            'homework_name' => $request->homework_name,
+            'time' => $request->time,
+            'end_time' => $request->end_time,
+        ]);
 
-    //     unset($request['image']);
-    //     $user = User::create($request->all());
+        foreach($request->questions as $questionId) {
+            HomeworkQuestion::create([
+                'homework_id'=> $homework->id,
+                'question_id' => $questionId,
+            ]);
+        }
 
-    //     flash()->addSuccess('Thêm thông tin thành công.');
-    //     return redirect()->route('user.index');
-    // }
+        flash()->addSuccess('Cập nhật thông tin thành công');
 
-    // public function show($id)
-    // {
-    //     $user = User::findOrFail($id);
+        return redirect()->route('homework.index');
+    }
 
-    //     return view('student.edit', compact('user'));
-    // }
+    public function show($id)
+    {
+        $homework = Homework::findOrFail($id);
+        $allQuestions = Question::orderBy('id', 'desc')->get();
 
-    // public function update(UpdateUserRequest $request, $id)
-    // {
-    //     unset($request['_token'], $request['_method']);
-    //     if($request->file('image')) {
-    //         $request['image_url'] = $this->upload($request);
-    //     }
-    //     unset($request['image']);
+        $questionIds = $homework->questions->pluck('id');
 
-    //     $user = User::where('id', $id)->update($request->all());
+        return view('homework.edit', compact('homework', 'allQuestions', 'questionIds'));
+    }
 
-    //     flash()->addSuccess('Cập nhật thông tin thành công');
-    //     return redirect()->route('user.index');
-    // }
+    public function update(UpdateHomeworkRequest $request, $id)
+    {
+        unset($request['_token'], $request['_method']);
 
-    // public function destroy($id)
-    // {
-    //     User::where('id', $id)->delete();
+        Homework::where('id', $id)->update([
+            'homework_name' => $request->homework_name,
+            'time' => $request->time,
+            'end_time' => $request->end_time,
+        ]);
 
-    //     flash()->addSuccess('Xóa thông tin thành công.');
-    //     return redirect()->route('user.index');
-    // }
+        $homework = Homework::findOrFail($id);
+
+        foreach ($homework->homeworkQuestions as $homeworkQuestion) {
+            $homeworkQuestion->delete();
+        }
+
+        foreach($request->questions as $questionId) {
+            HomeworkQuestion::create([
+                'homework_id'=> $homework->id,
+                'question_id' => $questionId,
+            ]);
+        }
+
+        flash()->addSuccess('Cập nhật thông tin thành công');
+        return redirect()->route('homework.index');
+    }
+
+    public function destroy($id)
+    {
+        Homework::where('id', $id)->delete();
+
+        flash()->addSuccess('Xóa thông tin thành công.');
+        return redirect()->route('homework.index');
+    }
 
     public function listApi(Request $request)
     {

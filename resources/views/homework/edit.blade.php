@@ -2,19 +2,19 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
 
-        <form method="POST" action="{{ route('room.update', $room->id) }}">
+        <form method="POST" action="{{ route('homework.update', $homework->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
                 <div class="col-lg-6 col-12 ">
                     <div class="card-header" style="margin-bottom: 20px">
-                        <h5>SỬA THÔNG TIN</h5>
+                        <h5>SỬA BÀI TẬP VỀ NHÀ</h5>
                     </div>
 
                     <div class="row">
                         <div class="col-9">
-                            <label for="name">PHÒNG HỌC</label>
-                            <input type="text" name="name" id="name" value="{{ $room->name }}" placeholder="Room ABC" class="form-control">
+                            <label for="homework_name">TÊN</label>
+                            <input type="text" name="homework_name" id="homework_name" placeholder="HOMEWORK ABC" class="form-control" value={{ $homework->homework_name}}>
                             @error('name')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
@@ -23,10 +23,39 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="description">MÔ TẢ</label>
-                            <input type="text" name="description" id="description" value="{{ $room->description }}" placeholder=""
-                            class="form-control">
-                            @error('description')
+                            <label for="time">THỜI GIAN LÀM BÀI (PHÚT)</label>
+                            <input type="text" name="time" id="time" placeholder="30" class="form-control"  value={{ $homework->time}}>
+                            @error('time')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="end_time">HẠN CHÓT</label>
+                            <?php
+                                $end_time_formatted = date('Y-m-d\TH:i', strtotime($homework->end_time));
+                            ?>
+                            <input type="datetime-local" name="end_time" id="end_time" placeholder="" class="form-control"  value={{ $end_time_formatted }}>
+                            @error('end_time')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="end_time">CÂU HỎI</label>
+                            <select class="multi-question form-control" name="questions[]" multiple="multiple">
+                                @foreach ($allQuestions as $question)
+                                    <option value="{{ $question->id }}" {{ $questionIds->contains($question->id) ? 'selected' : ''}}>
+                                        <span style="font-size: bold">Câu hỏi {{ $question->id }}: </span>
+                                        {{ $question->question }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('end_time')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -40,3 +69,23 @@
     </main>
 
 </x-app-layout>
+
+
+<script src="/assets/js/plugins/datatables.js"></script>
+<script>
+    const dataTableBasic = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: true,
+        columns: [{
+            select: [2, 6],
+            sortable: false
+        }]
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.multi-question').select2();
+    });
+</script>
+

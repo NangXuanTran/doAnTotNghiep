@@ -104,11 +104,11 @@
     <div class="modal-dialog" style="margin-top: 20%;">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteUserModalLabel">Xác nhận xóa người dùng</h5>
+                <h5 class="modal-title" id="deleteUserModalLabel">Xác nhận xóa bài tập</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Bạn có chắc chắn muốn xóa người dùng này không?
+                Bạn có chắc chắn muốn xóa bài tập này không?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -126,9 +126,9 @@
 <script>
     $('#deleteUserModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var roomId = button.data('room-id');
+        var homeworkId = button.data('homework-id');
 
-        var actionUrl = '/room/' + roomId;
+        var actionUrl = '/homework/' + homeworkId;
         var modal = $(this);
         modal.find('#deleteUserForm').attr('action', actionUrl);
     })
