@@ -56,7 +56,7 @@ class DashboardController extends Controller
         for ($i = 0; $i < 12; $i++) {
             $startOfMonth = now()->subMonth($i)->startOfMonth();
             $endOfMonth = now()->subMonth($i)->endOfMonth();
-            $classesLastMonth = Classroom::whereDate('created_at', '>=', $lastMonthStart)->whereDate('created_at', '<=', $lastMonthEnd)->get();
+            $classesLastMonth = Classroom::whereDate('created_at', '>=', $startOfMonth)->whereDate('created_at', '<=', $endOfMonth)->get();
             $countRevenue = 0;
             $countClass = count($classesLastMonth);
             $countStudent = 0;
@@ -82,7 +82,6 @@ class DashboardController extends Controller
             ];
         }
 
-        dd($countsLast12Months);
 
         return view('dashboard', compact(
             'countRevenueMonth', 'countClassThisMonth', 'countStudentThisMonth', 'countTeacherThisMonth',

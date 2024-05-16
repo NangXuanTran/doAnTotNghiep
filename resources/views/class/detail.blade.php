@@ -1,7 +1,7 @@
 <x-app-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
-        @if (!isset($classes))
+        @if (!isset($class))
             <h4>Dữ liệu trống</h4>
         @else
             <div class="px-5 py-4 container-fluid">
@@ -11,7 +11,7 @@
                             <div class="pb-0 card-header">
                                 <div class="row">
                                     <div class="col-6" style="margin-top:10px">
-                                        <h5 class="">QUẢN LÝ LỚP HỌC</h5>
+                                        <h5 class="">{{$class->name}}</h5>
                                     </div>
                                     @if (auth()->user()->role == 1)
                                         <div class="col-6 text-end">
@@ -61,7 +61,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($classes as $key => $class)
+                                        {{-- @foreach ($classes as $key => $class) --}}
                                             <tr>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->id }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->name }}</td>
@@ -69,22 +69,13 @@
                                                 <td class="align-middle bg-transparent border-bottom">{{ count($class->students) }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->room->name }}</td>
                                                 <td class="text-center align-middle bg-transparent border-bottom">
-                                                    {{-- <a href="{{ route('class.detail', $class->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a> --}}
-                                                    <a style="margin-right: 10px" href="{{ route('class.student.list', $class->id )}}" title="Học viên">
-                                                        <i class="fas fa-user-tie" aria-hidden="true"></i>
-                                                    </a>
-                                                    <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Bài tập">
-                                                        <i class="fas fa-house" aria-hidden="true"></i>
-                                                    </a>
-                                                    <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Chi tiết">
-                                                        <i class="fas fa-eye" aria-hidden="true"></i>
-                                                    </a>
+                                                    <a href="{{ route('class.show', $class->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        {{-- @endforeach --}}
                                     </tbody>
                                 </table>
-                                {{ $classes->links('layouts.paginate') }}
+                                {{-- {{ $classes->links('layouts.paginate') }} --}}
                             </div>
                         </div>
                     </div>
@@ -107,4 +98,3 @@
         }]
     });
 </script>
-

@@ -69,7 +69,6 @@
                                 </tbody>
                             </table>
                             {{ $attendances->links('layouts.paginate') }}
-
                         </div>
                     </div>
                 </div>

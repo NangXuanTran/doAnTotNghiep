@@ -14,7 +14,7 @@ class AttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $classIds = Classroom::where('teacher_id', $request->user()->id)->pluck('id');
+        $classes = Classroom::where('teacher_id', $request->user()->id)->get();
 
         $lessonIds = Lesson::whereIn('classroom_id', $classIds)->pluck('id');
         $attendances = Attendance::whereIn('lesson_id', $lessonIds)->orderBy('id', 'desc')->paginate(10)->withQueryString();

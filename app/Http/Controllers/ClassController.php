@@ -14,9 +14,16 @@ class ClassController extends Controller
 {
     public function index(Request $request)
     {
-        $homeworks = Homework::paginate(10)->withQueryString();
+        $classes = Classroom::where('teacher_id', $request->user()->id)->paginate(10)->withQueryString();
+        // dd($request->user()->id);
+        return view('class.index', compact('classes'));
+    }
 
-        return view('class.index', compact('homeworks'));
+    public function show(Request $request, $id)
+    {
+        $class = Classroom::findOrFail($id);
+
+        return view('class.detail', compact('class'));
     }
 
     //API

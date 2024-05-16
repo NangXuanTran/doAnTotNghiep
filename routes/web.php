@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Class\StudentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
@@ -47,6 +48,10 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
 
     Route::resource('/class', ClassController::class);
+    Route::get('/class/student/{class_id}', [StudentController::class, 'index'])->name('class.student.list');
+    Route::get('/class/homework/{class_id}', [AttendanceController::class, 'index'])->name('class.homework.list');
+    Route::get('/class/student/{class_id}/{student_id}', [AttendanceController::class, 'index'])->name('class.student.detail');
+    Route::get('/class/lesson/{class_id}/{lesson_id}', [AttendanceController::class, 'index'])->name('class.lesson.attendance.list');
 
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
