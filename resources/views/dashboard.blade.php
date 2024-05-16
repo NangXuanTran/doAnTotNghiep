@@ -24,7 +24,7 @@
                                         <h4 class="mb-2 font-weight-bold">{{  number_format($countRevenueMonth, 0, ',', ',') }} (VND)</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>{{ $growRevenue }}%
+                                                <i class="fa fa-chevron-up text-xs me-1"></i>{{ number_format($growRevenue, 0, ',', ',') }}%
                                             </span>
                                             <span class="text-sm ms-1">THÁNG TRƯỚC</span>
                                         </div>
@@ -55,7 +55,7 @@
                                         <h4 class="mb-2 font-weight-bold">{{ $countClassThisMonth }}</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>{{ $growClass }}%
+                                                <i class="fa fa-chevron-up text-xs me-1"></i>{{ number_format($growClass, 0, ',', ',') }}%
                                             </span>
                                             <span class="text-sm ms-1">THÁNG TRƯỚC</span>
                                         </div>
@@ -84,7 +84,7 @@
                                         <h4 class="mb-2 font-weight-bold">{{ $countTeacherThisMonth }}</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i> {{ $growTeacher }}%
+                                                <i class="fa fa-chevron-up text-xs me-1"></i> {{ number_format($growTeacher, 0, ',', ',') }}%
                                             </span>
                                             <span class="text-sm ms-1">THÁNG TRƯỚC</span>
                                         </div>
@@ -113,7 +113,7 @@
                                         <h4 class="mb-2 font-weight-bold">{{ $countStudentThisMonth }}</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>{{ $growStudent }}%
+                                                <i class="fa fa-chevron-up text-xs me-1"></i>{{ number_format($growStudent, 0, ',', ',') }}%
                                             </span>
                                             <span class="text-sm ms-1">THÁNG TRƯỚC</span>
                                         </div>
