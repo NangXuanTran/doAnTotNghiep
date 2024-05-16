@@ -37,7 +37,7 @@ class LoginController extends Controller
             if (Auth::user()->isAdmin()) {
                 return redirect()->intended('/dashboard');
             } else {
-                return redirect()->intended('/teacher');
+                return redirect()->intended('/class');
             }
         }
 

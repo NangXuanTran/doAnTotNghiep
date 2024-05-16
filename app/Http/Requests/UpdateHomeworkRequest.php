@@ -25,7 +25,7 @@ class UpdateHomeworkRequest extends FormRequest
             'homework_name' => 'required|string',
             'time' => 'required|integer|min:1',
             'end_time' => 'required',
-            'questions' => 'required'
+            'questions' => 'required',
         ];
     }
 }

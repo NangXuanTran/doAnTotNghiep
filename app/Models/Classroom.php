@@ -13,7 +13,7 @@ class Classroom extends Model
         'name',
         'teacher_id',
         'room_id',
-        'fee'
+        'fee',
     ];
     /**
      * Relationships

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreHomeworkController;
 use App\Http\Requests\StoreHomeworkRequest;
 use App\Http\Requests\UpdateHomeworkRequest;
 use App\Models\Homework;
@@ -27,16 +26,17 @@ class HomeworkController extends Controller
         return view('homework.add', compact('questions'));
     }
 
-    public function store(StoreHomeworkRequest $request) {
+    public function store(StoreHomeworkRequest $request)
+    {
         $homework = Homework::create([
             'homework_name' => $request->homework_name,
             'time' => $request->time,
             'end_time' => $request->end_time,
         ]);
 
-        foreach($request->questions as $questionId) {
+        foreach ($request->questions as $questionId) {
             HomeworkQuestion::create([
-                'homework_id'=> $homework->id,
+                'homework_id' => $homework->id,
                 'question_id' => $questionId,
             ]);
         }
@@ -72,14 +72,15 @@ class HomeworkController extends Controller
             $homeworkQuestion->delete();
         }
 
-        foreach($request->questions as $questionId) {
+        foreach ($request->questions as $questionId) {
             HomeworkQuestion::create([
-                'homework_id'=> $homework->id,
+                'homework_id' => $homework->id,
                 'question_id' => $questionId,
             ]);
         }
 
         flash()->addSuccess('Cập nhật thông tin thành công');
+
         return redirect()->route('homework.index');
     }
 
@@ -88,6 +89,7 @@ class HomeworkController extends Controller
         Homework::where('id', $id)->delete();
 
         flash()->addSuccess('Xóa thông tin thành công.');
+
         return redirect()->route('homework.index');
     }
 

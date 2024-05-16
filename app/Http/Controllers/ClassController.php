@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Classroom;
+use App\Models\Homework;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -11,6 +12,14 @@ use Illuminate\Support\Carbon;
 
 class ClassController extends Controller
 {
+    public function index(Request $request)
+    {
+        $homeworks = Homework::paginate(10)->withQueryString();
+
+        return view('class.index', compact('homeworks'));
+    }
+
+    //API
     public function getListApi(Request $request)
     {
         $classroomIds = User::find($request->user()->id)->classrooms->pluck('id')->toArray();

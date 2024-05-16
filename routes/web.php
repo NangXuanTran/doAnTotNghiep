@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HomeworkController;
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::post('/document/upload', [DocumentController::class, 'uploadFile'])->name('document.upload');
     Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
 
+    Route::resource('/class', ClassController::class);
+
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -55,15 +58,13 @@ Route::middleware(['auth', 'manager'])->group(function () {
     });
 
     Route::middleware('teacher')->group(function () {
-        Route::get('/attendance', [AttendanceController::class,'index'])->name('attendance.index');
-        Route::get('/attendance/detail/{id}', [AttendanceController::class,'detailClass'])->name('attendance.detail.class');
+        Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+        Route::get('/attendance/detail/{id}', [AttendanceController::class, 'detailClass'])->name('attendance.detail.class');
 
-        Route::get('/calendar', [ScheduleController::class,'index'])->name('calendar.index');
+        Route::get('/calendar', [ScheduleController::class, 'index'])->name('calendar.index');
     });
-
-
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])
-        ->middleware('auth')
-        ->name('logout');
+    ->middleware('auth')
+    ->name('logout');

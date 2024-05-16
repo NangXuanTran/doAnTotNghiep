@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Classroom;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
