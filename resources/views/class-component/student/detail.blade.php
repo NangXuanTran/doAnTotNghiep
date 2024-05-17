@@ -8,7 +8,7 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6" style="margin-top:10px">
-                                    <h5 class="">DANH SÁCH HỌC VIÊN</h5>
+                                    <h5 class="">{{ $student->name }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -35,44 +35,32 @@
                                             ID</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            ẢNH ĐẠI DIỆN</th>
+                                            BUỔI HỌC</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            HỌ TÊN</th>
+                                            BẮT ĐẦU</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            ĐIỂM DANH</th>
+                                            KẾT THÚC</th>
                                         <th
                                             class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            BÀI TẬP VỀ NHÀ</th>
-
-                                        <th
-                                            class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            HÀNH ĐỘNG</th>
+                                            TRẠNG THÁI</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($lessons as $lesson)
                                         <tr>
-                                            <td class="align-middle bg-transparent border-bottom">{{$user->id}}</td>
-                                            <td class="align-middle bg-transparent border-bottom">
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <img src="{{ $user->image_url ? asset($user->image_url) :
-                                                     asset('../assets/img/team-1.jpg') }}" class="rounded-circle mr-2"
-                                                        alt="user1" style="height: 36px; width: 36px;">
-                                                </div>
-                                            </td>
-                                            <td class="align-middle bg-transparent border-bottom">{{$user->name}}</td>
-                                            <td class="align-middle bg-transparent border-bottom"> {{ $user->count_attendance}} / {{$user->count_lesson}}</td>
-                                            <td class="text-center align-middle bg-transparent border-bottom">{{ $user->count_homework_finished }} / {{ $user->count_homework }}</td>
-                                            <td class="text-center align-middle bg-transparent border-bottom">
-                                                <a href="{{ route('class.student.detail', ['class_id' => $class->id, 'student_id' => $user->id] )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
-                                            </td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ $lesson->id }}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ $lesson->lesson_name }}</td>
+                                            <td class="align-middle bg-transparent border-bottom"> {{ $lesson->start_time }} </td>
+                                            <td class="text-center align-middle bg-transparent border-bottom">{{ $lesson->end_time }}</td>
+                                            <td class="text-center align-middle bg-transparent border-bottom">{{ $lesson->end_time }}</td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $users->links('layouts.paginate') }}
+                            {{ $lessons->links('layouts.paginate') }}
                         </div>
                     </div>
                 </div>

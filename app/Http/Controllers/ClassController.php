@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Classroom;
-use App\Models\Homework;
 use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -15,12 +14,15 @@ class ClassController extends Controller
 {
     public function index(Request $request)
     {
-        $classes = Classroom::where('teacher_id', $request->user()->id)->paginate(10)->withQueryString();
-        foreach($classes as $class)
-        {
-            $class["count_finished"] = count(Lesson::where('classroom_id', $class->id )
-            ->where('end_time', '<', now())
-            ->get());
+        if ($request->user()->role == 1) {
+            $classes = Classroom::paginate(10)->withQueryString();
+        } else {
+            $classes = Classroom::where('teacher_id', $request->user()->id)->paginate(10)->withQueryString();
+        }
+        foreach ($classes as $class) {
+            $class['count_finished'] = count(Lesson::where('classroom_id', $class->id)
+                ->where('end_time', '<', now())
+                ->get());
         }
 
         return view('class.index', compact('classes'));
@@ -29,8 +31,13 @@ class ClassController extends Controller
     public function show(Request $request, $id)
     {
         $class = Classroom::findOrFail($id);
+        $lessons = $class->lessons()->paginate(10)->withQueryString();
+        foreach ($lessons as $lesson) {
+            $lesson['attendance'] = count($lesson->attendances()->where('status', 0)->get());
+            $lesson['is_finished'] = Carbon::now()->greaterThan($lesson->end_time) ? 1 : 0;
+        }
 
-        return view('class.detail', compact('class'));
+        return view('class.detail', compact('class', 'lessons'));
     }
 
     //API

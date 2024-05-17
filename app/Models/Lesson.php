@@ -31,4 +31,9 @@ class Lesson extends Model
     {
         return $this->belongsToMany(Document::class, 'document_lessons', 'lesson_id', 'document_id');
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'lesson_id', 'id');
+    }
 }

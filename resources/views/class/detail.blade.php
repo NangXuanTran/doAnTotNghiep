@@ -1,9 +1,6 @@
 <x-app-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
-        @if (!isset($class))
-            <h4>Dữ liệu trống</h4>
-        @else
             <div class="px-5 py-4 container-fluid">
                 <div class="mt-4 row">
                     <div class="col-12">
@@ -45,43 +42,42 @@
                                                 ID</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                TÊN</th>
+                                                BUỔI HỌC</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                SỐ BUỔI HỌC</th>
+                                                BẮT ĐẦU</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                SỐ HỌC VIÊN</th>
+                                                KẾT THÚC</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                PHÒNG HỌC</th>
+                                                SỸ SỐ</th>
                                             <th
                                                 class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 HÀNH ĐỘNG</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($classes as $key => $class) --}}
+                                        @foreach ($lessons as $key => $lesson)
                                             <tr>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $class->id }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $class->name }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ count($class->lessons) }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ count($class->students) }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $class->room->name }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $key + 1 }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->lesson_name }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->start_time }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->end_time }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->attendance }} / {{ count($class->students) }}</td>
                                                 <td class="text-center align-middle bg-transparent border-bottom">
-                                                    <a href="{{ route('class.show', $class->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                    <a style="margin-right: 10px" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                                                    <a class="{{ $lesson->is_finished ? 'disabled-link' : '' }}" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
-                                {{-- {{ $classes->links('layouts.paginate') }} --}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        @endif
         <x-app.footer />
     </main>
 

@@ -73,9 +73,6 @@
                                                     <a style="margin-right: 10px" href="{{ route('class.studednt.list', $class->id )}}" title="Học viên">
                                                         <i class="fas fa-user-tie" aria-hidden="true"></i>
                                                     </a>
-                                                    <a style="margin-right: 10px" href="{{ route('class.homework.list', $class->id )}}" title="Bài tập">
-                                                        <i class="fas fa-house" aria-hidden="true"></i>
-                                                    </a>
                                                     <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Chi tiết">
                                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                                     </a>

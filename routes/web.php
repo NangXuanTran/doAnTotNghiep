@@ -53,9 +53,6 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/class_homework/{class_id}', [ClassHomeworkController::class, 'index'])->name('class.homework.list');
     Route::get('/class_student/{class_id}/{student_id}', [StudentController::class, 'detail'])->name('class.student.detail');
 
-
-    // Route::get('/class/homework/{class_id}', [AttendanceController::class, 'index'])->name('class.homework.list');
-    // Route::get('/class/student/{class_id}/{student_id}', [AttendanceController::class, 'index'])->name('class.student.detail');
     Route::get('/class/lesson/{class_id}/{lesson_id}', [AttendanceController::class, 'index'])->name('class.lesson.attendance.list');
 
     Route::middleware('admin')->group(function () {

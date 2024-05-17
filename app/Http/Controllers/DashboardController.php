@@ -43,8 +43,8 @@ class DashboardController extends Controller
         $growRevenue = 999999999;
         $growClass = 999999999;
         $growStudent = 999999999;
-        $growTeacher= 999999999;
-        if($countRevenueLastMonth && $countClassLastMonth && $countStudentLastMonth && $countTeacherLastMonth) {
+        $growTeacher = 999999999;
+        if ($countRevenueLastMonth && $countClassLastMonth && $countStudentLastMonth && $countTeacherLastMonth) {
             $growRevenue = round(($countRevenueMonth - $countRevenueLastMonth) / $countRevenueLastMonth * 100);
             $growClass = round(($countClassThisMonth - $countClassLastMonth) / $countClassLastMonth * 100);
             $growStudent = round(($countStudentThisMonth - $countStudentLastMonth) / $countStudentLastMonth * 100);
@@ -78,10 +78,9 @@ class DashboardController extends Controller
                 'countRevenue' => $countRevenue,
                 'countClass' => $countClass,
                 'countStudent' => $countStudent,
-                'countTeacher' => $countTeacher
+                'countTeacher' => $countTeacher,
             ];
         }
-
 
         return view('dashboard', compact(
             'countRevenueMonth', 'countClassThisMonth', 'countStudentThisMonth', 'countTeacherThisMonth',
