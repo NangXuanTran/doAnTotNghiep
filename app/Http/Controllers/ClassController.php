@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Classroom;
 use App\Models\Homework;
+use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -15,7 +16,13 @@ class ClassController extends Controller
     public function index(Request $request)
     {
         $classes = Classroom::where('teacher_id', $request->user()->id)->paginate(10)->withQueryString();
-        // dd($request->user()->id);
+        foreach($classes as $class)
+        {
+            $class["count_finished"] = count(Lesson::where('classroom_id', $class->id )
+            ->where('end_time', '<', now())
+            ->get());
+        }
+
         return view('class.index', compact('classes'));
     }
 

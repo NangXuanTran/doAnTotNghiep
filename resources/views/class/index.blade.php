@@ -48,7 +48,7 @@
                                                 TÊN</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                SỐ BUỔI HỌC</th>
+                                                ĐÃ DIỄN RA</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 SỐ HỌC VIÊN</th>
@@ -65,15 +65,15 @@
                                             <tr>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->id }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->name }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ count($class->lessons) }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $class->count_finished }} / {{ count($class->lessons) }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ count($class->students) }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->room->name }}</td>
                                                 <td class="text-center align-middle bg-transparent border-bottom">
                                                     {{-- <a href="{{ route('class.detail', $class->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a> --}}
-                                                    <a style="margin-right: 10px" href="{{ route('class.student.list', $class->id )}}" title="Học viên">
+                                                    <a style="margin-right: 10px" href="{{ route('class.studednt.list', $class->id )}}" title="Học viên">
                                                         <i class="fas fa-user-tie" aria-hidden="true"></i>
                                                     </a>
-                                                    <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Bài tập">
+                                                    <a style="margin-right: 10px" href="{{ route('class.homework.list', $class->id )}}" title="Bài tập">
                                                         <i class="fas fa-house" aria-hidden="true"></i>
                                                     </a>
                                                     <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Chi tiết">

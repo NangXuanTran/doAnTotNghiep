@@ -10,6 +10,11 @@
                                 <div class="col-6" style="margin-top:10px">
                                     <h5 class="">DANH SÁCH HỌC VIÊN</h5>
                                 </div>
+                                <div class="col-6 text-end">
+                                    <a href="{{ route('user.create') }}" class="btn btn-dark btn-primary">
+                                        <i class="fas fa-user-plus me-2"></i> THÊM
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="row justify-content-center">
@@ -41,14 +46,16 @@
                                             HỌ TÊN</th>
                                         <th
                                             class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            ĐIỂM DANH</th>
+                                            EMAIL</th>
                                         <th
                                             class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            BÀI TẬP VỀ NHÀ</th>
-
+                                            SỐ ĐIỆN THOẠI</th>
                                         <th
                                             class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            HÀNH ĐỘNG</th>
+                                            NGÀY SINH</th>
+                                        <th
+                                            class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                            HÀNH ĐỘNG   </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,10 +70,18 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle bg-transparent border-bottom">{{$user->name}}</td>
-                                            <td class="align-middle bg-transparent border-bottom"> {{ $user->count_attendance}} / {{$user->count_lesson}}</td>
-                                            <td class="text-center align-middle bg-transparent border-bottom">{{ $user->count_homework_finished }} / {{ $user->count_homework }}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{$user->email}}</td>
+                                            <td class="text-center align-middle bg-transparent border-bottom">{{$user->phone_number}}</td>
+                                            <td class="text-center align-middle bg-transparent border-bottom">{{$user->birthday}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
-                                                <a href="{{ route('user.show', $user->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                                                <a href="{{ route('user.show', $user->id )}}"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
+                                                <a href="{{ route('user.destroy', $user->id )}}"
+                                                    type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteUserModal"
+                                                    data-user-id="{{ $user->id }}"
+                                                >
+                                                <i class="fas fa-trash" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -82,3 +97,16 @@
     </main>
 
 </x-app-layout>
+
+<script src="/assets/js/plugins/datatables.js"></script>
+<script>
+    const dataTableBasic = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: true,
+        columns: [{
+            select: [2, 6],
+            sortable: false
+        }]
+    });
+</script>
+
