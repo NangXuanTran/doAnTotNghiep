@@ -15,7 +15,7 @@
                                     </div>
                                     @if (auth()->user()->role == 1)
                                         <div class="col-6 text-end">
-                                            <a href="{{ route('homework.create') }}" class="btn btn-dark btn-primary">
+                                            <a href="{{ route('class.create') }}" class="btn btn-dark btn-primary">
                                                 <i class="fas fa-plus me-2"></i> THÊM
                                             </a>
                                         </div>
@@ -48,13 +48,19 @@
                                                 TÊN</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                ĐÃ DIỄN RA</th>
+                                                GIÁO VIÊN</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                SỐ HỌC VIÊN</th>
+                                                BUỔI HỌC</th>
+                                            <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                HỌC VIÊN</th>
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 PHÒNG HỌC</th>
+                                            <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                HỌC PHÍ (VND)</th>
                                             <th
                                                 class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 HÀNH ĐỘNG</th>
@@ -63,11 +69,13 @@
                                     <tbody>
                                         @foreach ($classes as $key => $class)
                                             <tr>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $class->id }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $key+ 1 }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->name }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $class->teacher->name }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->count_finished }} / {{ count($class->lessons) }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ count($class->students) }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->room->name }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ number_format($class->fee , 0, ',', ',')}}</td>
                                                 <td class="text-center align-middle bg-transparent border-bottom">
                                                     {{-- <a href="{{ route('class.detail', $class->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a> --}}
                                                     <a style="margin-right: 10px" href="{{ route('class.studednt.list', $class->id )}}" title="Học viên">
@@ -75,6 +83,9 @@
                                                     </a>
                                                     <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Chi tiết">
                                                         <i class="fas fa-eye" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a style="margin-right: 10px" href="{{ route('class.edit.detail', $class->id )}}" title="Sửa thông tin">
+                                                        <i class="fas fa-edit" aria-hidden="true"></i>
                                                     </a>
                                                 </td>
                                             </tr>

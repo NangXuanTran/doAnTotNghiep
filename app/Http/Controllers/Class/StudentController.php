@@ -20,7 +20,7 @@ class StudentController extends Controller
             $class = Classroom::where('teacher_id', $request->user()->id)->where('id', $id)->first();
         }
         $lessonIds = $class->lessons()->pluck('id')->toArray();
-        $homeworkIds = $class->homeworks()->pluck('id')->toArray();
+        $homeworkIds = $class->homeworks->pluck('id')->toArray();
         $users = $class->students()->paginate(10)->withQueryString();
         foreach ($class->students as $key => $student) {
             $users[$key]['count_attendance'] = count(Attendance::whereIn('lesson_id', $lessonIds)
@@ -42,8 +42,6 @@ class StudentController extends Controller
 
     public function detail(Request $request, $class_id, $student_id)
     {
-        // return view
-        // dd($class_id, $student_id
         $student = User::findOrFail($student_id);
         $class = Classroom::findOrFail($class_id);
         $lessons = $class->lessons()->paginate(10)->withQueryString();

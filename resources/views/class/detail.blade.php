@@ -104,13 +104,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($lessons as $key => $lesson)
+                                        @foreach ($homeworks as $key => $homework)
                                             <tr>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $key + 1 }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->lesson_name }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->start_time }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->end_time }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->attendance }} / {{ count($class->students) }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $homework->homework_name }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ count($homework->questions) }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $homework->time }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $homework->end_time }} / {{ count($class->students) }}</td>
                                                 <td class="text-center align-middle bg-transparent border-bottom">
                                                     <a style="margin-right: 10px" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
                                                     <a class="{{ $lesson->is_finished ? 'disabled-link' : '' }}" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>

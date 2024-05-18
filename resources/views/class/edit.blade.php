@@ -2,19 +2,19 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-app.navbar />
 
-        <form method="POST" action="{{ route('homework.update', $homework->id) }}">
+        <form method="POST" id="yourFormId" action="{{ route('class.update', $class->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-5 row justify-content-center" style="margin-top: 3%">
                 <div class="col-lg-6 col-12 ">
                     <div class="card-header" style="margin-bottom: 20px">
-                        <h5>SỬA BÀI TẬP VỀ NHÀ</h5>
+                        <h5>SỬA THÔNG TIN LỚP HỌC</h5>
                     </div>
 
                     <div class="row">
                         <div class="col-9">
-                            <label for="homework_name">TÊN</label>
-                            <input type="text" name="homework_name" id="homework_name" placeholder="HOMEWORK ABC" class="form-control" value={{ $homework->homework_name}}>
+                            <label for="name">TÊN LỚP HỌC</label>
+                            <input type="text" name="name" id="name" placeholder="TOEIC CĂN BẢN" class="form-control" value="{{ $class->name }}">
                             @error('name')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
@@ -23,39 +23,53 @@
 
                     <div class="row" style="margin-top: 3%;">
                         <div class="col-9">
-                            <label for="time">THỜI GIAN LÀM BÀI (PHÚT)</label>
-                            <input type="text" name="time" id="time" placeholder="30" class="form-control"  value={{ $homework->time}}>
-                            @error('time')
-                                <span class="text-danger text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 3%;">
-                        <div class="col-9">
-                            <label for="end_time">HẠN CHÓT</label>
-                            <?php
-                                $end_time_formatted = date('Y-m-d\TH:i', strtotime($homework->end_time));
-                            ?>
-                            <input type="datetime-local" name="end_time" id="end_time" placeholder="" class="form-control"  value={{ $end_time_formatted }}>
-                            @error('end_time')
-                                <span class="text-danger text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 3%;">
-                        <div class="col-9">
-                            <label for="end_time">CÂU HỎI</label>
-                            <select class="multi-question form-control" name="questions[]" multiple="multiple">
-                                @foreach ($allQuestions as $question)
-                                    <option value="{{ $question->id }}" {{ $questionIds->contains($question->id) ? 'selected' : ''}}>
-                                        <span style="font-size: bold">Câu hỏi {{ $question->id }}: </span>
-                                        {{ $question->question }}
-                                    </option>
+                            <label for="teacher_id">GIÁO VIÊN</label>
+                            <select class="form-control" id="teacher_id" name="teacher_id" placeholder="">
+                                <option value="">--- Lựa chọn ---</option>
+                                @foreach ($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}" @if($class->teacher->name == $teacher->name ) selected @endif>{{ $teacher->name }}</option>
                                 @endforeach
                             </select>
-                            @error('end_time')
+                            @error('teacher_id')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="room_id">CHỌN PHÒNG HỌC</label>
+                            <select class="form-control" id="room_id" name="room_id">
+                                <option value="">--- Lựa chọn ---</option>
+                                @foreach ($rooms as $room)
+                                    <option value="{{ $room->id }}" @if($class->room->name == $room->name ) selected @endif>{{ $room->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('room_id')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="students">HỌC VIÊN</label>
+                            <select class="multi-student form-control" name="students[]" multiple="multiple">
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}" {{ $studentIds->contains($student->id) ? 'selected' : ''}}><span style="font-size: bold">{{ $student->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('students')
+                                <span class="text-danger text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3%;">
+                        <div class="col-9">
+                            <label for="fee">HỌC PHÍ (VND)</label>
+                            <input type="text" name="fee" id="fee" placeholder="1000000" class="form-control" value="{{ $class->fee }}">
+                            @error('fee')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -69,7 +83,6 @@
     </main>
 
 </x-app-layout>
-
 
 <script src="/assets/js/plugins/datatables.js"></script>
 <script>
@@ -85,7 +98,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.multi-question').select2();
+        $('.multi-student').select2();
     });
 </script>
 

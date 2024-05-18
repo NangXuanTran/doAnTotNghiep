@@ -55,9 +55,6 @@
                                             NGÀY SINH</th>
                                         <th
                                             class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                            LỚP HỌC QUẢN LÝ</th>
-                                        <th
-                                            class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                             HÀNH ĐỘNG   </th>
                                     </tr>
                                 </thead>
@@ -76,13 +73,6 @@
                                             <td class="align-middle bg-transparent border-bottom">{{$teacher->email}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">{{$teacher->phone_number}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">{{$teacher->birthday}}</td>
-                                            <td class="text-center align-middle bg-transparent border-bottom">
-                                                <ul style="padding-left: 0">
-                                                    @foreach ($teacher->classes as $teacher->class)
-                                                        <li style="list-style: none;">{{ $teacher->class->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
                                                 <a href="{{ route('teacher.show', $teacher->id )}}"><i class="fas fa-user-edit" aria-hidden="true"></i></a>
                                                 <a href="{{ route('teacher.destroy', $teacher->id )}}"

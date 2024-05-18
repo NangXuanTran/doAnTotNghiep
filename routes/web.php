@@ -49,8 +49,9 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
 
     Route::resource('/class', ClassController::class);
+    Route::get('/class_update/{class_id}', [ClassController::class, 'viewDetailClass'])->name('class.edit.detail');
     Route::get('/class_student/{class_id}', [StudentController::class, 'index'])->name('class.studednt.list');
-    Route::get('/class_homework/{class_id}', [ClassHomeworkController::class, 'index'])->name('class.homework.list');
+    // Route::get('/class_homework/{class_id}', [ClassHomeworkController::class, 'index'])->name('class.homework.list');
     Route::get('/class_student/{class_id}/{student_id}', [StudentController::class, 'detail'])->name('class.student.detail');
 
     Route::get('/class/lesson/{class_id}/{lesson_id}', [AttendanceController::class, 'index'])->name('class.lesson.attendance.list');

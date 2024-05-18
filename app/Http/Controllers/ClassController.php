@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClassRequest;
+use App\Http\Requests\UpdateClassRequest;
 use App\Models\Attendance;
 use App\Models\Classroom;
+use App\Models\ClassroomStudent;
 use App\Models\Lesson;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -15,7 +19,7 @@ class ClassController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->role == 1) {
-            $classes = Classroom::paginate(10)->withQueryString();
+            $classes = Classroom::orderBy('id', 'desc')->paginate(10)->withQueryString();
         } else {
             $classes = Classroom::where('teacher_id', $request->user()->id)->paginate(10)->withQueryString();
         }
@@ -28,6 +32,71 @@ class ClassController extends Controller
         return view('class.index', compact('classes'));
     }
 
+    public function create()
+    {
+        $students = User::where('role', 3)->orderBy('id', 'desc')->get();
+        $rooms = Room::all();
+        $teachers = User::where('role',2)->orderBy('id','desc')->get();
+
+        return view('class.add', compact('students', 'rooms', 'teachers'));
+    }
+
+    public function store(StoreClassRequest $request)
+    {
+        $studentIds = $request->students;
+        unset($request['students']);
+        $class = Classroom::create($request->all());
+
+        foreach($studentIds as $studentId) {
+            ClassroomStudent::create([
+                'classroom_id' => $class->id,
+                'student_id' => $studentId,
+            ]);
+        }
+
+        flash()->addSuccess('Cập nhật thông tin thành công');
+
+        return redirect()->route('class.index');
+    }
+
+    public function viewDetailClass(Request $request, $id) {
+        $class = Classroom::findOrFail($id);
+        $students = User::where('role', 3)->orderBy('id', 'desc')->get();
+        $rooms = Room::all();
+        $teachers = User::where('role',2)->orderBy('id','desc')->get();
+        $studentIds = $class->students->pluck('id');
+
+        return view('class.edit', compact('class', 'students', 'rooms', 'teachers', 'studentIds'));
+    }
+
+    public function update(UpdateClassRequest $request, $id) {
+        unset($request['_token'], $request['_method']);
+
+        Classroom::where('id', $id)->update([
+            'name' => $request->name,
+            'teacher_id' => $request->teacher_id,
+            'room_id' => $request->room_id,
+            'fee' => $request->fee,
+        ]);
+
+        $class = Classroom::findOrFail($id);
+        foreach ($class->classroomStudents as $classroomStudent) {
+            $classroomStudent->delete();
+        }
+
+        foreach ($request->students as $studentId) {
+            ClassroomStudent::create([
+                'classroom_id' => $class->id,
+                'student_id' => $studentId,
+            ]);
+        }
+
+        flash()->addSuccess('Cập nhật thông tin thành công');
+
+        return redirect()->route('class.index');
+    }
+
+    // Buổi học, bài tập
     public function show(Request $request, $id)
     {
         $class = Classroom::findOrFail($id);
@@ -37,7 +106,13 @@ class ClassController extends Controller
             $lesson['is_finished'] = Carbon::now()->greaterThan($lesson->end_time) ? 1 : 0;
         }
 
-        return view('class.detail', compact('class', 'lessons'));
+        $homeworks = $class->homeworks()->paginate(10)->withQueryString();
+        // foreach ($lessons as $lesson) {
+        //     $lesson['attendance'] = count($lesson->attendances()->where('status', 0)->get());
+        //     $lesson['is_finished'] = Carbon::now()->greaterThan($lesson->end_time) ? 1 : 0;
+        // }
+
+        return view('class.detail', compact('class', 'lessons', 'homeworks'));
     }
 
     //API
