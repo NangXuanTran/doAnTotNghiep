@@ -178,6 +178,7 @@ class ClassController extends Controller
 
     public function getTaskApi(Request $request)
     {
+        //TODO : sửa lại db
         $user = User::where('id', $request->user()->id)->with([
             'classrooms' => [
                 'room',

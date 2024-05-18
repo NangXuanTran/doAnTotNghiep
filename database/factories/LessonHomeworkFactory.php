@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Classroom;
 use App\Models\Homework;
+use App\Models\Lesson;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ClassroomHomework>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\LessonHomework>
  */
-class ClassroomHomeworkFactory extends Factory
+class LessonHomeworkFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,11 +18,11 @@ class ClassroomHomeworkFactory extends Factory
      */
     public function definition(): array
     {
-        $classIds = Classroom::get()->pluck('id')->toArray();
+        $lessonIds = Lesson::get()->pluck('id')->toArray();
         $homeworkIds = Homework::get()->pluck('id')->toArray();
 
         return [
-            'classroom_id' => $this->faker->randomElement($classIds),
+            'lesson_id' => $this->faker->randomElement($lessonIds),
             'homework_id' => $this->faker->randomElement($homeworkIds),
         ];
     }

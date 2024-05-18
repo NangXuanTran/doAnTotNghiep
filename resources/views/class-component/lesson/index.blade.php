@@ -73,51 +73,6 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="pb-0 card-header">
-                                    <div class="row">
-                                        <div class="col-6" style="margin-top:10px">
-                                            <h5 class="">DANH SÁCH BÀI TẬP ({{$class->name}})</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <table class="table text-secondary text-center">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                ID</th>
-                                            <th
-                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                TÊN</th>
-                                            <th
-                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                SỐ LƯỢNG CÂU HỎI</th>
-                                            <th
-                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                THỜI GIAN (PHÚT)</th>
-                                            <th
-                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                HẠN CHÓT</th>
-                                            <th
-                                                class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
-                                                HÀNH ĐỘNG</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($homeworks as $key => $homework)
-                                            <tr>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $key + 1 }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $homework->homework_name }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ count($homework->questions) }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $homework->time }}</td>
-                                                <td class="align-middle bg-transparent border-bottom">{{ $homework->end_time }}</td>
-                                                <td class="text-center align-middle bg-transparent border-bottom">
-                                                    <a style="margin-right: 10px" href="{{ route('class.show', $homework->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>

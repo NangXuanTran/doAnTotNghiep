@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\ClassroomHomework;
+use App\Models\LessonHomework;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ClassroomHomeworkSeeder extends Seeder
+class LessonHomeworkSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        ClassroomHomework::factory()->count(50)->create();
+        LessonHomework::factory()->count(50)->create();
     }
 }

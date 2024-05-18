@@ -17,10 +17,6 @@ class LessonController extends Controller
             $lesson['attendance'] = count($lesson->attendances()->where('status', 0)->get());
             $lesson['is_finished'] = Carbon::now()->greaterThan($lesson->end_time) ? 1 : 0;
         }
-
-        $homeworks = $class->homeworks()->paginate(10)->withQueryString();
-        // dd($class->homeworks());
-
-        return view('class-component.lesson.index', compact('class', 'lessons', 'homeworks'));
+        return view('class-component.lesson.index', compact('class', 'lessons'));
     }
 }

@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classroom_homeworks', function (Blueprint $table) {
+        Schema::create('lesson_homeworks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('classroom_id');
+            $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('homework_id');
             $table->timestamps();
         });
     }
 
-
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('classroom_homeworks');
+        Schema::dropIfExists('lesson_homeworks');
     }
 };
