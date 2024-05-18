@@ -54,7 +54,11 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/class-student-detail/{class_id}-{student_id}', [StudentController::class, 'detail'])->name('class_student.detail');
 
 
-    Route::get('/class_lesson/{id}', [ClassLessonController::class, 'index'])->name('class_lesson.index');
+    Route::get('/class-lesson/{id}', [ClassLessonController::class, 'index'])->name('class_lesson.index');
+    Route::get('/class-lesson-create/{class_id}', [ClassLessonController::class, 'create'])->name('class_lesson.create');
+    Route::post('/class-lesson-store/{class_id}', [ClassLessonController::class, 'store'])->name('class_lesson.store');
+    Route::get('/class-lesson-show/{class_id}-{lesson_id}', [ClassLessonController::class, 'show'])->name('class_lesson.show');
+
 
     Route::group(['prefix' => 'class_student'], function(){
         Route::get('/{class_id}/{student_id}/', [StudentController::class, 'detail'])->name('class.student.detail');

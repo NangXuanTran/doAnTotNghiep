@@ -56,7 +56,8 @@
                             <label for="students">HỌC VIÊN</label>
                             <select class="multi-student form-control" name="students[]" multiple="multiple">
                                 @foreach ($students as $student)
-                                    <option value="{{ $student->id }}" {{ $studentIds->contains($student->id) ? 'selected' : ''}}><span style="font-size: bold">{{ $student->name }}</option>
+                                    <option value="{{ $student->id }}" {{ $studentIds->contains($student->id) ? 'selected' : ''}}>
+                                        <span style="font-size: bold">{{ $student->name }}</option>
                                 @endforeach
                             </select>
                             @error('students')

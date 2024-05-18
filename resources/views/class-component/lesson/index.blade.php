@@ -12,7 +12,7 @@
                                     </div>
                                     @if (auth()->user()->role == 1)
                                         <div class="col-6 text-end">
-                                            <a href="{{ route('homework.create') }}" class="btn btn-dark btn-primary">
+                                            <a href="{{ route('class_lesson.create', $class->id) }}" class="btn btn-dark btn-primary">
                                                 <i class="fas fa-plus me-2"></i> THÊM
                                             </a>
                                         </div>
@@ -53,6 +53,9 @@
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 SỸ SỐ</th>
                                             <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                BÀI TẬP</th>
+                                            <th
                                                 class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 HÀNH ĐỘNG</th>
                                         </tr>
@@ -65,9 +68,12 @@
                                                 <td class="align-middle bg-transparent border-bottom">{{ $lesson->start_time }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $lesson->end_time }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ $lesson->attendance }} / {{ count($class->students) }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ count($lesson->homeworks) }}</td>
                                                 <td class="text-center align-middle bg-transparent border-bottom">
                                                     <a style="margin-right: 10px" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
-                                                    <a class="{{ $lesson->is_finished ? 'disabled-link' : '' }}" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                    <a class="{{ $lesson->is_finished ? 'disabled-link' : '' }}" href="{{ route('class_lesson.show', [$class->id, $lesson->id] )}}">
+                                                        <i class="fas fa-edit" aria-hidden="true"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
