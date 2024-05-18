@@ -16,7 +16,7 @@ class HomeworkSeeder extends Seeder
         $date = date('Y-m-d H:i:s', strtotime('+'.rand(0, 15).' day'));
 
         DB::table('homeworks')->insert([
-            'classroom_id' => 1,
+            // 'classroom_id' => 1,
             'homework_name' => 'Test dinh ky',
             'time' => 30,
             'end_time' => $date,

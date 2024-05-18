@@ -21,7 +21,7 @@ class HomeworkFactory extends Factory
         $classIds = Classroom::get()->pluck('id')->toArray();
 
         return [
-            'classroom_id' => $this->faker->randomElement($classIds),
+            // 'classroom_id' => $this->faker->randomElement($classIds),
             'homework_name' => $this->faker->words(3, true),
             'time' => 30,
             'end_time' => $date,

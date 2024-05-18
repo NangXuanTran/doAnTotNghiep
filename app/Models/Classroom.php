@@ -56,8 +56,13 @@ class Classroom extends Model
     }
 
     // 1 class - n homework
+    // public function homeworks()
+    // {
+    //     return $this->hasMany(Homework::class, 'classroom_id', 'id');
+    // }
+
     public function homeworks()
     {
-        return $this->hasMany(Homework::class, 'classroom_id', 'id');
+        return $this->belongsToMany(Homework::class, 'classroom_homeworks', 'classroom_id', 'homework_id');
     }
 }

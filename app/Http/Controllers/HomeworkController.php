@@ -97,6 +97,7 @@ class HomeworkController extends Controller
     {
         $homeworks = Homework::with('classroom')->get();
         foreach ($homeworks as $homework) {
+            // TODO: fix lại DB
             $homework['teacher'] = $homework->classroom->teacher->name;
             $homework['nameClass'] = $homework->classroom->name;
             $homework['assignmentName'] = $homework->homework_name;

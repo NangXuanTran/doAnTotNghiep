@@ -8,7 +8,7 @@
                             <div class="pb-0 card-header">
                                 <div class="row">
                                     <div class="col-6" style="margin-top:10px">
-                                        <h5 class="">{{$class->name}}</h5>
+                                        <h5 class="">DANH SÁCH BUỔI HỌC ({{$class->name}})</h5>
                                     </div>
                                     @if (auth()->user()->role == 1)
                                         <div class="col-6 text-end">
@@ -52,6 +52,52 @@
                                             <th
                                                 class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 SỸ SỐ</th>
+                                            <th
+                                                class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                HÀNH ĐỘNG</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($lessons as $key => $lesson)
+                                            <tr>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $key + 1 }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->lesson_name }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->start_time }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->end_time }}</td>
+                                                <td class="align-middle bg-transparent border-bottom">{{ $lesson->attendance }} / {{ count($class->students) }}</td>
+                                                <td class="text-center align-middle bg-transparent border-bottom">
+                                                    <a style="margin-right: 10px" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                                                    <a class="{{ $lesson->is_finished ? 'disabled-link' : '' }}" href="{{ route('class.show', $lesson->id )}}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="pb-0 card-header">
+                                    <div class="row">
+                                        <div class="col-6" style="margin-top:10px">
+                                            <h5 class="">DANH SÁCH BÀI TÂP TẬP ({{$class->name}})</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table text-secondary text-center">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                ID</th>
+                                            <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                TÊN</th>
+                                            <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                SỐ LƯỢNG CÂU HỎI</th>
+                                            <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                THỜI GIAN (PHÚT)</th>
+                                            <th
+                                                class="text-left text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
+                                                HẠN CHÓT</th>
                                             <th
                                                 class="text-center text-uppercase font-weight-bold bg-transparent border-bottom text-secondary">
                                                 HÀNH ĐỘNG</th>

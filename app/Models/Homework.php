@@ -12,7 +12,7 @@ class Homework extends Model
     protected $table = 'homeworks';
 
     protected $fillable = [
-        'classroom_id',
+        // 'classroom_id',
         'homework_name',
         'time',
         'end_time',

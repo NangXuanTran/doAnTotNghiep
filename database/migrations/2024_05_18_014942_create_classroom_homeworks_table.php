@@ -11,21 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('homeworks', function (Blueprint $table) {
+        Schema::create('classroom_homeworks', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('classroom_id')->nullable();
-            $table->string('homework_name');
-            $table->float('time');
-            $table->dateTime('end_time');
+            $table->unsignedBigInteger('classroom_id');
+            $table->unsignedBigInteger('homework_id');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
-        Schema::dropIfExists('homeworks');
+        Schema::dropIfExists('classroom_homeworks');
     }
 };

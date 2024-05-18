@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             DocumentSeeder::class,
             DocumentLessonSeeder::class,
             HomeworkQuestionSeeder::class,
+            // ClassroomHomeworkSeeder::class,
         ]);
     }
 }
