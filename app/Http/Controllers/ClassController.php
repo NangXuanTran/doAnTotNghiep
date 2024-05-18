@@ -59,7 +59,7 @@ class ClassController extends Controller
         return redirect()->route('class.index');
     }
 
-    public function viewDetailClass(Request $request, $id) {
+    public function show(Request $request, $id) {
         $class = Classroom::findOrFail($id);
         $students = User::where('role', 3)->orderBy('id', 'desc')->get();
         $rooms = Room::all();
@@ -96,24 +96,6 @@ class ClassController extends Controller
         return redirect()->route('class.index');
     }
 
-    // Buổi học, bài tập
-    public function show(Request $request, $id)
-    {
-        $class = Classroom::findOrFail($id);
-        $lessons = $class->lessons()->paginate(10)->withQueryString();
-        foreach ($lessons as $lesson) {
-            $lesson['attendance'] = count($lesson->attendances()->where('status', 0)->get());
-            $lesson['is_finished'] = Carbon::now()->greaterThan($lesson->end_time) ? 1 : 0;
-        }
-
-        $homeworks = $class->homeworks()->paginate(10)->withQueryString();
-        // foreach ($lessons as $lesson) {
-        //     $lesson['attendance'] = count($lesson->attendances()->where('status', 0)->get());
-        //     $lesson['is_finished'] = Carbon::now()->greaterThan($lesson->end_time) ? 1 : 0;
-        // }
-
-        return view('class.detail', compact('class', 'lessons', 'homeworks'));
-    }
 
     //API
     public function getListApi(Request $request)

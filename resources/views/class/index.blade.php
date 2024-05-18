@@ -77,14 +77,13 @@
                                                 <td class="align-middle bg-transparent border-bottom">{{ $class->room->name }}</td>
                                                 <td class="align-middle bg-transparent border-bottom">{{ number_format($class->fee , 0, ',', ',')}}</td>
                                                 <td class="text-center align-middle bg-transparent border-bottom">
-                                                    {{-- <a href="{{ route('class.detail', $class->id )}}"><i class="fas fa-eye" aria-hidden="true"></i></a> --}}
-                                                    <a style="margin-right: 10px" href="{{ route('class.studednt.list', $class->id )}}" title="Học viên">
+                                                    <a style="margin-right: 10px" href="{{ route('class_student.index', $class->id )}}" title="Học viên">
                                                         <i class="fas fa-user-tie" aria-hidden="true"></i>
                                                     </a>
-                                                    <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Chi tiết">
+                                                    <a style="margin-right: 10px" href="{{ route('class_lesson.index', $class->id )}}" title="Chi tiết">
                                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                                     </a>
-                                                    <a style="margin-right: 10px" href="{{ route('class.edit.detail', $class->id )}}" title="Sửa thông tin">
+                                                    <a style="margin-right: 10px" href="{{ route('class.show', $class->id )}}" title="Sửa thông tin">
                                                         <i class="fas fa-edit" aria-hidden="true"></i>
                                                     </a>
                                                 </td>

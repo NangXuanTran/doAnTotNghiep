@@ -42,6 +42,7 @@ class StudentController extends Controller
 
     public function detail(Request $request, $class_id, $student_id)
     {
+        // dd($class_id, $student_id);
         $student = User::findOrFail($student_id);
         $class = Classroom::findOrFail($class_id);
         $lessons = $class->lessons()->paginate(10)->withQueryString();

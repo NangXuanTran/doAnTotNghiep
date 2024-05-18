@@ -50,7 +50,7 @@
                                 <tbody>
                                     @foreach ($lessons as $lesson)
                                         <tr>
-                                            <td class="align-middle bg-transparent border-bottom">{{ $lesson->id }}</td>
+                                            <td class="align-middle bg-transparent border-bottom">{{ $key+1 }}</td>
                                             <td class="align-middle bg-transparent border-bottom">{{ $lesson->lesson_name }}</td>
                                             <td class="align-middle bg-transparent border-bottom"> {{ $lesson->start_time }} </td>
                                             <td class="text-center align-middle bg-transparent border-bottom">{{ $lesson->end_time }}</td>
@@ -60,7 +60,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $lessons->links('layouts.paginate') }}
                         </div>
                     </div>
                 </div>

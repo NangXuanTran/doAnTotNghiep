@@ -3,7 +3,7 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Class\HomeworkController as ClassHomeworkController;
+use App\Http\Controllers\Class\LessonController as ClassLessonController;
 use App\Http\Controllers\Class\StudentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\DashboardController;
@@ -49,12 +49,20 @@ Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/document/download/{id}', [DocumentController::class, 'downloadFile'])->name('document.download');
 
     Route::resource('/class', ClassController::class);
-    Route::get('/class_update/{class_id}', [ClassController::class, 'viewDetailClass'])->name('class.edit.detail');
-    Route::get('/class_student/{class_id}', [StudentController::class, 'index'])->name('class.studednt.list');
-    // Route::get('/class_homework/{class_id}', [ClassHomeworkController::class, 'index'])->name('class.homework.list');
-    Route::get('/class_student/{class_id}/{student_id}', [StudentController::class, 'detail'])->name('class.student.detail');
+    // Route::get('/class_update/{class_id}', [ClassController::class, 'viewDetailClass'])->name('class.edit.detail');
+    // Route::resource('/class_student', StudentController::class);
+    Route::get('/class-student/{id}', [StudentController::class, 'index'])->name('class_student.index');
+    Route::get('/class-student-detail/{class_id}-{student_id}', [StudentController::class, 'detail'])->name('class_student.detail');
 
-    Route::get('/class/lesson/{class_id}/{lesson_id}', [AttendanceController::class, 'index'])->name('class.lesson.attendance.list');
+
+    Route::get('/class_lesson/{id}', [ClassLessonController::class, 'index'])->name('class_lesson.index');
+
+    // Route::get('/class_student/{class_id}', [StudentController::class, 'index'])->name('class.studednt.list');
+    Route::group(['prefix' => 'class_student'], function(){
+        Route::get('/{class_id}/{student_id}/', [StudentController::class, 'detail'])->name('class.student.detail');
+    });
+    // Route::get('/{class_id}/{student_id}', [StudentController::class, 'detail'])->name('class.student.detail');
+    // Route::get('/class/lesson/{class_id}/{lesson_id}', [AttendanceController::class, 'index'])->name('class.lesson.attendance.list');
 
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -67,7 +75,6 @@ Route::middleware(['auth', 'manager'])->group(function () {
 
     Route::middleware('teacher')->group(function () {
         Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
-        Route::get('/attendance/detail/{id}', [AttendanceController::class, 'detailClass'])->name('attendance.detail.class');
 
         Route::get('/calendar', [ScheduleController::class, 'index'])->name('calendar.index');
     });

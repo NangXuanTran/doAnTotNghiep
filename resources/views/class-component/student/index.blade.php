@@ -8,7 +8,7 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6" style="margin-top:10px">
-                                    <h5 class="">DANH SÁCH HỌC VIÊN</h5>
+                                    <h5 class="">{{ $class->name }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($users as $key =>  $user)
                                         <tr>
                                             <td class="align-middle bg-transparent border-bottom">{{$user->id}}</td>
                                             <td class="align-middle bg-transparent border-bottom">
@@ -66,7 +66,7 @@
                                             <td class="align-middle bg-transparent border-bottom"> {{ $user->count_attendance}} / {{$user->count_lesson}}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">{{ $user->count_homework_finished }} / {{ $user->count_homework }}</td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
-                                                <a href="{{ route('class.student.detail', ['class_id' => $class->id, 'student_id' => $user->id] )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                                                <a href="{{ route('class_student.detail', ['class_id' => $class->id, 'student_id' => $user->id] )}}"><i class="fas fa-eye" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
